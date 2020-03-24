@@ -1,0 +1,17 @@
+﻿<Application x:Class="TriageClient.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TriageClient"
+             StartupUri="LoginWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary  Source="Styles/TabControl.xaml"/>
+                <ResourceDictionary  Source="Styles/DataGridStyle.xaml"/>
+
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
