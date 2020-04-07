@@ -16,8 +16,7 @@ namespace HttpServer
         static void Main()
         {
             log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(("log4net.config")));
-            NancyHost nancySelfHost = new NancyHost(new Uri("http://localhost:8005/"));
-            nancySelfHost.Start();
+           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmMain());
