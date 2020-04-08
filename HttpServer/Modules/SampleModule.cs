@@ -22,10 +22,14 @@ namespace HttpServer.Modules
             };
 
             Get["/GetData"] = GetData;
+            Get["/call"] = Call;
         }
 
-      
 
+        private Response Call(dynamic _)
+        {
+            return "响应完成";
+        }
         /// <summary>
         /// 获取数据
         /// </summary>
@@ -33,6 +37,7 @@ namespace HttpServer.Modules
         /// <returns></returns>
         private  Response GetData(dynamic _)
         {
+            var name = Request.Query["Name"];//get请求获取方法
             Log4.Debug("调用接口");
             try
             {

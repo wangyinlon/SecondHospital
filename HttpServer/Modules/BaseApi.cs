@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using HttpServer.Model;
 using HttpServer.Utils;
 using Nancy;
+using Nancy.ModelBinding;
 using YinLong.Utils.Core.Log;
+using YinLong.Utils.Core.Net.Http;
 using YinLong.Utils.Core.Ui;
 
 namespace HttpServer.Modules
@@ -29,6 +31,91 @@ namespace HttpServer.Modules
             OnError += OnErroe;
         }
         #endregion
+
+        #region 获取请求数据
+        /// <summary>
+        /// 获取请求数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetReqData<T>() where T : class
+        {
+            try
+            {
+                ReqParameter<string> req = this.Bind<ReqParameter<string>>();
+                return req.data.ToObject<T>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        /// <summary>
+        /// 获取请求数据
+        /// </summary>
+        /// <returns></returns>
+        public string GetReqData()
+        {
+            try
+            {
+                ReqParameter<string> req = this.Bind<ReqParameter<string>>();
+                return req.data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        /// <summary>
+        /// 获取请求数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetReq<T>() where T : class
+        {
+            try
+            {
+                T req = this.Bind<T>();
+                return req;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+        protected string getPara(string key)
+        {
+            Nancy.DynamicDictionary querydict = this.Request.Query as Nancy.DynamicDictionary;
+            if (querydict != null)
+            {
+                if (querydict.ContainsKey(key)) return CharSetHelper.UrlDeCode(querydict[key], Encoding.UTF8);
+            }
+
+            Nancy.DynamicDictionary queryform = this.Request.Form as Nancy.DynamicDictionary;
+            if (queryform != null)
+            {
+                if (queryform.ContainsKey(key)) return CharSetHelper.UrlDeCode(queryform[key], Encoding.UTF8);
+            }
+            return "";
+        }
+        protected string getParaWithoutUrldecode(string key)
+        {
+            Nancy.DynamicDictionary querydict = this.Request.Query as Nancy.DynamicDictionary;
+            if (querydict != null)
+            {
+                if (querydict.ContainsKey(key)) return querydict[key];
+            }
+
+            Nancy.DynamicDictionary queryform = this.Request.Form as Nancy.DynamicDictionary;
+            if (queryform != null)
+            {
+                if (queryform.ContainsKey(key)) return queryform[key];
+            }
+            return "";
+        }
         /// <summary>
         /// 前置拦截器
         /// </summary>
