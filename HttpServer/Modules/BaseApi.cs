@@ -21,7 +21,16 @@ namespace HttpServer.Modules
         {
             Before += BeforeRequest;
             After += AfterRequest;
-            OnError += OnErroe;
+            //After += async (ctx, ct) =>
+            //{
+            //    //this.AddToLog("After Hook Delay\n");
+            //    await Task.Delay(5000);
+            //    //this.AddToLog("After Hook Complete\n");
+
+            //    //ctx.Response = this.GetLog();
+
+            //};
+                OnError += OnErroe;
         }
         public BaseApi(string baseUrl)
             : base(baseUrl)
