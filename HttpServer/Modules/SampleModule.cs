@@ -1,4 +1,6 @@
-﻿using Nancy;
+﻿using HttpServer.Model;
+using InfoQuick.SinoVoice.Tts;
+using Nancy;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using YinLong.Utils.Core.Log;
+using YinLong.Utils.Core.Ui;
 
 namespace HttpServer.Modules
 {
@@ -28,6 +31,13 @@ namespace HttpServer.Modules
 
         private Response Call(dynamic _)
         {
+            string msg = getPara("msg");
+            int iErr = Jtts.jTTS_Play(msg, 0);
+            if (Jtts.ERR_NONE != iErr)
+            {
+                Log4.Debug("错误号" + iErr);
+                AppReportManager.Instance.Send(new LogEntity() { Log ="错误号"+ iErr });
+            }
             return "响应完成";
         }
         /// <summary>
