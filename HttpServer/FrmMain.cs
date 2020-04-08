@@ -62,6 +62,7 @@ namespace HttpServer
             AppCfg.Instance.Save();
             if (button1.Text=="开启")
             {
+                textBoxPort.Enabled = false;
                 button1.Text = "停止";
                 HostConfiguration hostConfig = new HostConfiguration()
                 {
@@ -79,7 +80,9 @@ namespace HttpServer
             }
             else
             {
+                
                 nancySelfHost.Stop();
+                textBoxPort.Enabled = true;
                 button1.Text = "开启";
                 AppReportManager.Instance.Send(new LogEntity() { Log = "停止监测" });
             }
