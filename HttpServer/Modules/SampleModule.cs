@@ -17,49 +17,34 @@ namespace HttpServer.Modules
     {
         public SampleModule()
         {
-           
+            //需要把views文件夹复制到debug目录
+            Get["/test"] = _ =>View["test.html"];
+            Get["/razor"] = _ => View["razor"];
             Get["/"] = r =>
             {
                 Console.WriteLine("ok");
                 return "hello world";
             };
-
-            Get["/GetData"] = GetData;
             Get["/call"] = Call;
         }
 
 
         private Response Call(dynamic _)
         {
+            //var name = Request.Query["Name"];//get请求获取方法
+            
             string msg = getPara("msg");
             int iErr = Jtts.jTTS_Play(msg, 0);
             if (Jtts.ERR_NONE != iErr)
             {
                 Log4.Debug("错误号" + iErr);
                 AppReportManager.Instance.Send(new LogEntity() { Log ="错误号"+ iErr });
+                return Fail("错误号" + iErr);
             }
-            return "响应完成";
+            Log4.Debug("成功" );
+            AppReportManager.Instance.Send(new LogEntity() { Log = "成功"  });
+            return Success("成功");
         }
-        /// <summary>
-        /// 获取数据
-        /// </summary>
-        /// <param name="_"></param>
-        /// <returns></returns>
-        private  Response GetData(dynamic _)
-        {
-            var name = Request.Query["Name"];//get请求获取方法
-            Log4.Debug("调用接口");
-            try
-            {
-               
-                    return  "aaaa";
-                
-            }
-            catch (Exception ex)
-            {
-                Log4.Debug("调用接口.异常" + ex);
-                return "异常,请联系管理员!";
-            }
-        }
+      
     }
 }
