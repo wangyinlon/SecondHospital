@@ -120,6 +120,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="refDll\jACE.dll" />
+    <Content Include="refDll\JACEXML.dll" />
+    <Content Include="refDll\JACEXML_Parser.dll" />
+    <Content Include="refDll\jG2P_CN.dll" />
+    <Content Include="refDll\jTTSSapi.dll" />
+    <Content Include="refDll\jTTSSAPI5.dll" />
+    <Content Include="refDll\jTTS_Audio.dll" />
+    <Content Include="refDll\jTTS_Filtrate.dll" />
+    <Content Include="refDll\JTTS_MA.dll" />
     <Content Include="refDll\jTTS_ML.dll" />
     <Content Include="refDll\YinLong.Utils.Core.dll" />
   </ItemGroup>
