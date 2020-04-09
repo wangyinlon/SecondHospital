@@ -27,10 +27,16 @@ namespace HttpServer
         public FrmMain()
         {
             InitializeComponent();
+
             int iErr = Jtts.jTTS_Init(null, null);
             if (Jtts.ERR_NONE == iErr || Jtts.ERR_ALREADYINIT == iErr)
             {
                 bInitialed = true;
+                MessageBox.Show("初始化成功");
+            }
+            else
+            {
+                JttsErrMsg(iErr);
             }
             Jtts.JTTS_CONFIG config = new InfoQuick.SinoVoice.Tts.Jtts.JTTS_CONFIG();
             iErr = Jtts.jTTS_Get(out config);
@@ -38,16 +44,16 @@ namespace HttpServer
             Jtts.jTTS_Set(ref config);
         }
 
-    
+
         private NancyHost nancySelfHost;
         private void FrmMain_Load(object sender, EventArgs e)
         {
             textBoxPort.Text = AppCfg.Instance.Port.ToString();
-           
-            
             AppReportManager.Instance.AddListener<LogEntity>(DoLogResult);
+
+
         }
-      
+
         void DoLogResult(LogEntity resultEntity)
         {
             this.Invoke(new MethodInvoker(delegate
@@ -60,7 +66,7 @@ namespace HttpServer
         {
             AppCfg.Instance.Port = IntExtension.Parse(textBoxPort.Text.Trim());
             AppCfg.Instance.Save();
-            if (button1.Text=="开启")
+            if (button1.Text == "开启")
             {
                 textBoxPort.Enabled = false;
                 button1.Text = "停止";
@@ -73,14 +79,14 @@ namespace HttpServer
                     }
                 };
                 Uri uri = new Uri("http://localhost:" + AppCfg.Instance.Port);
-                nancySelfHost =new NancyHost(hostConfig, uri);
-                
+                nancySelfHost = new NancyHost(hostConfig, uri);
+
                 nancySelfHost.Start();
                 AppReportManager.Instance.Send(new LogEntity() { Log = "开启监测" });
             }
             else
             {
-                
+
                 nancySelfHost.Stop();
                 textBoxPort.Enabled = true;
                 button1.Text = "开启";
@@ -244,6 +250,10 @@ namespace HttpServer
             if (Jtts.ERR_NONE != iErr)
             {
                 JttsErrMsg(iErr);
+            }
+            else
+            {
+                MessageBox.Show("完成");
             }
         }
     }

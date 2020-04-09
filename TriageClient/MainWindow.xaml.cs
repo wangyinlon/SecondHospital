@@ -63,7 +63,7 @@ namespace TriageClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private  void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (Configs.QueryDocLoginModel.Result.KSMC.Length >= 6)
             {
@@ -74,7 +74,7 @@ namespace TriageClient
             ZJYSMC.Text = Configs.QueryDocLoginModel.Result.ZJYSMC;
 
             TextBlockCurrentPatient.Text = "";
-           
+
             DataGridRow dgr = new DataGridRow();
             // DG1.Items.Add(new DataGridRow() { Item = new { GHXH = "1-1", HZXM = "2-2" } });
             //后台线程
@@ -150,7 +150,7 @@ namespace TriageClient
                         TextBlockTip.Text = count.ToString();
                     }));
                     ResharhWait();
-                   
+
 
                     Thread.Sleep(5 * 1000);
                 }
@@ -283,8 +283,13 @@ namespace TriageClient
             new OnlyShowMessageBox().Show("请注意：前方高能，禁止入内！", false);
         }
 
-        #region 叫号
+        
 
+        #region 普通叫号
+
+        
+
+        
         /// <summary>
         /// 叫号
         /// </summary>
@@ -309,6 +314,8 @@ namespace TriageClient
                 //请求服务器
                 TextBlockCurrentPatient.Text = SubRowsId().HZXM;
                 SubRowsId().PatientState = Configs.State_YiJiaoHoa;
+                //广播叫号
+                _apis.Call(SubRowsId().HZXM);
                 //更新等待就诊
                 ResharhWait();
             }
@@ -317,100 +324,6 @@ namespace TriageClient
                 new OnlyShowMessageBox().Show(Configs.State_JiaoHaoFail, false);
             }
         }
-        private void ButtonJiaoHao_ZJ_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (DG2.SelectedIndex < 0)
-            {
-                new OnlyShowMessageBox().Show("请选择病人！", false);
-                return;
-            }
-
-            if (((OUTP_JZJLK)DG2.SelectedItem).PatientState == Configs.State_YiJiaoHoa)
-            {
-                new OnlyShowMessageBox().Show("已经叫过号了！", false);
-                return;
-            }
-
-            if (_apis.PutPatiendCall(((OUTP_JZJLK)DG2.SelectedItem).PATID, SubRowsId().GHXH))
-            {
-                //请求服务器
-                TextBlockCurrentPatient_ZJ.Text = ((OUTP_JZJLK)DG2.SelectedItem).HZXM;
-                ((OUTP_JZJLK)DG2.SelectedItem).PatientState = Configs.State_YiJiaoHoa;
-                //更新等待就诊
-                ResharhWait();
-            }
-            else
-            {
-                new OnlyShowMessageBox().Show(Configs.State_JiaoHaoFail, false);
-            }
-        }
-        private void ButtonJiaoHao_FC_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (DG3.SelectedIndex < 0)
-            {
-                new OnlyShowMessageBox().Show("请选择病人！", false);
-                return;
-            }
-
-            if (((OUTP_JZJLK)DG3.SelectedItem).PatientState == Configs.State_YiJiaoHoa)
-            {
-                new OnlyShowMessageBox().Show("已经叫过号了！", false);
-                return;
-            }
-
-            if (_apis.PutPatiendCall(((OUTP_JZJLK)DG3.SelectedItem).PATID, SubRowsId().GHXH))
-            {
-                //请求服务器
-                TextBlockCurrentPatient_FC.Text = ((OUTP_JZJLK)DG3.SelectedItem).HZXM;
-                ((OUTP_JZJLK)DG3.SelectedItem).PatientState = Configs.State_YiJiaoHoa;
-                //更新等待就诊
-                ResharhWait();
-            }
-            else
-            {
-                new OnlyShowMessageBox().Show(Configs.State_JiaoHaoFail, false);
-            }
-        }
-        #endregion
-
-        #region 刷新等待叫号
-
-        /// <summary>
-        /// 刷新等待叫号
-        /// </summary>
-        private void ResharhWait()
-        {
-            var list = patientInfoList_0.Where(x => x.PatientState == Configs.PatientStateDefault).Take(2).ToList();
-            if (list.Count == 0)
-            {
-                TextBlockWait1.Text = "";
-                TextBlockWait2.Text = "";
-            }
-            else if (list.Count == 1)
-            {
-                TextBlockWait1.Text = list[0].HZXM;
-                TextBlockWait2.Text = "";
-            }
-            else if (list.Count == 2)
-            {
-                TextBlockWait1.Text = list[0].HZXM;
-                TextBlockWait2.Text = list[1].HZXM;
-            }
-
-        }
-        #endregion
-
-        #region 获取选中行的原始值
-        /// <summary>
-        /// 获取选中行的原始值
-        /// </summary>
-        /// <param name="rowindex"></param>
-        private OUTP_JZJLK SubRowsId()
-        {
-            return (OUTP_JZJLK)DG1.SelectedItem;
-        }
-        #endregion
-
         #region 下一个
 
         /// <summary>
@@ -433,6 +346,8 @@ namespace TriageClient
                     //请求服务器
                     TextBlockCurrentPatient.Text = list.HZXM;
                     list.PatientState = Configs.State_YiJiaoHoa;
+                    //广播叫号
+                    _apis.Call(SubRowsId().HZXM);
                     //更新等待就诊
                     ResharhWait();
                 }
@@ -497,6 +412,121 @@ namespace TriageClient
 
         }
         #endregion
+        #endregion
+
+        #region 专家叫号
+
+
+
+
+        private void ButtonJiaoHao_ZJ_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DG2.SelectedIndex < 0)
+            {
+                new OnlyShowMessageBox().Show("请选择病人！", false);
+                return;
+            }
+
+            if (((OUTP_JZJLK)DG2.SelectedItem).PatientState == Configs.State_YiJiaoHoa)
+            {
+                new OnlyShowMessageBox().Show("已经叫过号了！", false);
+                return;
+            }
+
+            if (_apis.PutPatiendCall(((OUTP_JZJLK)DG2.SelectedItem).PATID, SubRowsId().GHXH))
+            {
+                //请求服务器
+                TextBlockCurrentPatient_ZJ.Text = ((OUTP_JZJLK)DG2.SelectedItem).HZXM;
+                ((OUTP_JZJLK)DG2.SelectedItem).PatientState = Configs.State_YiJiaoHoa;
+                //更新等待就诊
+                ResharhWait();
+            }
+            else
+            {
+                new OnlyShowMessageBox().Show(Configs.State_JiaoHaoFail, false);
+            }
+        }
+        #endregion
+
+        #region 复查叫号
+
+
+
+
+        private void ButtonJiaoHao_FC_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DG3.SelectedIndex < 0)
+            {
+                new OnlyShowMessageBox().Show("请选择病人！", false);
+                return;
+            }
+
+            if (((OUTP_JZJLK)DG3.SelectedItem).PatientState == Configs.State_YiJiaoHoa)
+            {
+                new OnlyShowMessageBox().Show("已经叫过号了！", false);
+                return;
+            }
+
+            if (_apis.PutPatiendCall(((OUTP_JZJLK)DG3.SelectedItem).PATID, SubRowsId().GHXH))
+            {
+                //请求服务器
+                TextBlockCurrentPatient_FC.Text = ((OUTP_JZJLK)DG3.SelectedItem).HZXM;
+                ((OUTP_JZJLK)DG3.SelectedItem).PatientState = Configs.State_YiJiaoHoa;
+                //更新等待就诊
+                ResharhWait();
+            }
+            else
+            {
+                new OnlyShowMessageBox().Show(Configs.State_JiaoHaoFail, false);
+            }
+        }
+        #endregion
+
+        
+
+        #region 刷新等待叫号
+
+        /// <summary>
+        /// 刷新等待叫号
+        /// </summary>
+        private void ResharhWait()
+        {
+            var list = patientInfoList_0.Where(x => x.PatientState == Configs.PatientStateDefault).Take(2).ToList();
+            if (list.Count == 0)
+            {
+                TextBlockWait1.Text = "";
+                TextBlockWait2.Text = "";
+            }
+            else if (list.Count == 1)
+            {
+                TextBlockWait1.Text = list[0].HZXM;
+                TextBlockWait2.Text = "";
+            }
+            else if (list.Count == 2)
+            {
+                TextBlockWait1.Text = list[0].HZXM;
+                TextBlockWait2.Text = list[1].HZXM;
+            }
+
+        }
+        #endregion
+
+        #region 获取选中行的原始值
+        /// <summary>
+        /// 获取选中行的原始值
+        /// </summary>
+        /// <param name="rowindex"></param>
+        private OUTP_JZJLK SubRowsId()
+        {
+            return (OUTP_JZJLK)DG1.SelectedItem;
+        }
+        #endregion
+
+       /// <summary>
+       /// 重新叫号
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
 
         private void ButtonJiaoAgain_OnClick(object sender, RoutedEventArgs e)
         {
@@ -505,8 +535,6 @@ namespace TriageClient
                 new OnlyShowMessageBox().Show("请选择病人！", false);
                 return;
             }
-
-
 
             if (_apis.PutPatiendCall(SubRowsId().PATID, SubRowsId().GHXH))
             {

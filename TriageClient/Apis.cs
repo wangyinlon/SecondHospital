@@ -89,7 +89,7 @@ namespace TriageClient
 
                 _item.Encoding = Encoding.UTF8;
                 _result = _helper.GetHtml(_item);
-                YinLong.Framework.Logs.Log4.Debug("[PutPatiendCall],[patid]" + patid + ",[返回]:" + _result);
+                YinLong.Framework.Logs.Log4.Debug("[PutPatiendCall],[patid]" + patid + ",[返回]:" + _result.Html);
                 if (_result.Html.Contains("\"Code\":200"))
                 {
                     return true;
@@ -122,5 +122,38 @@ namespace TriageClient
                 return null;
             }
         }
+
+        #region 广播
+        /// <summary>
+        /// 广播服务
+        /// </summary>
+        /// <param name="msg">消息</param>
+        /// <returns></returns>
+        public bool Call(string msg)
+        {
+            try
+            {
+                msg = "请" + msg + "到" + Configs.QueryDocLoginModel.Result.ZJMC + "就诊";
+                _item.URL = ConfigurationManager.AppSettings["CallHost"] + "/call?msg=" + System.Web.HttpUtility.UrlEncode(msg, Encoding.UTF8);
+                _item.Encoding = Encoding.UTF8;
+                _result = _helper.GetHtml(_item);
+                YinLong.Framework.Logs.Log4.Debug("[Call],[msg]" + msg + ",[返回]:" + _result.Html);
+                if (_result.Html.Contains("\"code\":200"))
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                YinLong.Framework.Logs.Log4.Error("[Call],[msg]" + msg + ",[异常]:" + e);
+                return false;
+
+            }
+
+
+        }
+
+        #endregion
     }
 }
