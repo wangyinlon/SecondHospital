@@ -125,6 +125,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResParameter.cs" />
+    <Compile Include="Models\ResponseCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\dcrf.cs" />
   </ItemGroup>
@@ -167,7 +169,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Card\" />
   </ItemGroup>
   <ItemGroup>

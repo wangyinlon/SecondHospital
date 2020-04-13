@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Web;
 
 namespace WebAppReadCard.Utils
 {
     public class dcrf
     {
+
+     
         /// <summary>
         /// 配置端口名称
         /// </summary>
@@ -34,6 +37,8 @@ namespace WebAppReadCard.Utils
         [DllImport("dcrf32.dll")]
         public static extern IntPtr dc_init(int port, int baud);
 
+     
+       
         /*
        * @brief  关闭设备。
        * @par    说明：
@@ -41,7 +46,7 @@ namespace WebAppReadCard.Utils
        * @param[in] icdev 设备标识符。
        * @return <0表示失败，==0表示成功。
        */
-        
+
         /// <summary>
         /// 关闭设备
         /// 说明：
@@ -51,10 +56,37 @@ namespace WebAppReadCard.Utils
         /// <returns>小于0表示失败，==0表示成功</returns>
         [DllImport("dcrf32.dll")]
         public static extern IntPtr dc_exit(IntPtr icdev);
-        [DllImport("dcrf32.dll")]
-        
 
-        public static extern IntPtr dc_readmag(IntPtr icdev,ref byte pTrack1Data, ref uint pTrack1Len, ref byte pTrack2Data, ref uint pTrack2Len, ref byte pTrack3Data, ref uint pTrack3Len);
+
+        [DllImport("dcrf32.dll")]
+        public static extern short dc_config_card(IntPtr icdev, char cardtype);  //初试化
+
+        /// <summary>
+        /// 读取磁条卡
+        /// </summary>
+        /// <param name="icdev"></param>
+        /// <param name="pTrack1Data"></param>
+        /// <param name="pTrack1Len"></param>
+        /// <param name="pTrack2Data"></param>
+        /// <param name="pTrack2Len"></param>
+        /// <param name="pTrack3Data"></param>
+        /// <param name="pTrack3Len"></param>
+        /// <returns></returns>
+        [DllImport("dcrf32.dll")]
+        public static extern IntPtr dc_readmag(IntPtr icdev, byte[] pTrack1Data, ref uint pTrack1Len,  byte[] pTrack2Data, ref uint pTrack2Len,  byte[] pTrack3Data, ref uint pTrack3Len);
+       
+        /// <summary>
+        /// 读取id卡
+        /// </summary>
+        /// <param name="icdev"></param>
+        /// <param name="time_ms"></param>
+        /// <param name="rlen"></param>
+        /// <param name="rdata"></param>
+        /// <returns></returns>
+        [DllImport("dcrf32.dll")]
+        public static extern IntPtr dc_ReadIdCardInfo(IntPtr icdev, int time_ms,ref int rlen, byte[] rdata);
+        [DllImport("dcrf32.dll")]
+        public static extern IntPtr  dc_read_idcard(IntPtr icdev, byte times, byte[] _Data);
         [DllImport("dcrf32.dll")]
         public static extern IntPtr dc_read(IntPtr icdev ,byte __Adr ,ref byte Data);
 
@@ -138,7 +170,7 @@ namespace WebAppReadCard.Utils
         /// <param name="value">状态值</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceSensorStatus(IntPtr icdev, ref byte value);
+        public static extern int dc_SelfServiceDeviceSensorStatus(IntPtr icdev,  byte[] value);
 
         /// <summary>
         /// 使自助设备进入上电初 始状态，设置参数为缺省参数

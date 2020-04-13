@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpServer", "HttpServer\Ht
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppReadCard", "WebAppReadCard\WebAppReadCard.csproj", "{3A77A8BA-1DB9-47C1-9578-D5B5EB408F8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardTest", "CardTest\CardTest.csproj", "{45574DC5-E907-4F9E-B042-9F16E9B17C04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3A77A8BA-1DB9-47C1-9578-D5B5EB408F8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A77A8BA-1DB9-47C1-9578-D5B5EB408F8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A77A8BA-1DB9-47C1-9578-D5B5EB408F8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45574DC5-E907-4F9E-B042-9F16E9B17C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45574DC5-E907-4F9E-B042-9F16E9B17C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45574DC5-E907-4F9E-B042-9F16E9B17C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45574DC5-E907-4F9E-B042-9F16E9B17C04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
