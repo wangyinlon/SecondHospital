@@ -117,4 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox10.Text" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;neuqpay&gt;
+&lt;requestdata&gt;
+&lt;VERSION&gt;1.0&lt;/VERSION&gt;
+&lt;BUSICODE&gt;00&lt;/BUSICODE&gt;
+&lt;YLJGBM&gt;支付平台提供的唯一的医疗机构编码，支付平台提供&lt;/YLJGBM&gt;
+&lt;DKLXDM&gt;1|2&lt;/DKLXDM&gt;
+&lt;OPERNO&gt;HIS 操作员编号&lt;/OPERNO&gt;
+&lt;OPERNAME&gt;HIS 操作员姓名&lt;/OPERNAME&gt;
+&lt;/requestdata&gt;
+&lt;/neuqpay&gt;</value>
+  </data>
 </root>

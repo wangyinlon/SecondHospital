@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button15 = new System.Windows.Forms.Button();
@@ -100,6 +101,8 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.button20 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -845,7 +848,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(682, 391);
+            this.button18.Location = new System.Drawing.Point(682, 363);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(312, 68);
             this.button18.TabIndex = 16;
@@ -855,7 +858,7 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(682, 529);
+            this.button19.Location = new System.Drawing.Point(682, 437);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(312, 68);
             this.button19.TabIndex = 17;
@@ -863,11 +866,33 @@
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(682, 534);
+            this.textBox10.Multiline = true;
+            this.textBox10.Name = "textBox10";
+            this.textBox10.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox10.Size = new System.Drawing.Size(312, 188);
+            this.textBox10.TabIndex = 18;
+            this.textBox10.Text = resources.GetString("textBox10.Text");
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(776, 508);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(75, 23);
+            this.button20.TabIndex = 19;
+            this.button20.Text = "button20";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 737);
+            this.Controls.Add(this.button20);
+            this.Controls.Add(this.textBox10);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
@@ -912,6 +937,7 @@
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -989,6 +1015,8 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Button button20;
     }
 }
 

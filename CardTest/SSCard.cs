@@ -12,7 +12,9 @@ namespace CardTest
     /// </summary>
     public class SSCard
     {
-        
+        [DllImport("neuqpayService.dll")]
+        public static extern int submitReqToCommService(string requestXml, StringBuilder responseXml);
+
         //[DllImport("SSCardDriver.dll"/*,EntryPoint = "iReadCardBas"*/)]
         //public static extern int iDOpenPort(int port, int name, int d);
 

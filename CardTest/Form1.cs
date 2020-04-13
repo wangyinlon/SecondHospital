@@ -378,16 +378,16 @@ namespace CardTest
             StringBuilder ierrinfo1 = new StringBuilder(2048);
             StringBuilder cardno = new StringBuilder(20480);
             StringBuilder ierrinfo = new StringBuilder(20480);
-            int port = IntExtension.Parse(textBox2.Text);
-            int com = IntExtension.Parse(textBox1.Text);//usb=100
+            int port = IntExtension.Parse(textBox1.Text);
+            int com = 0;//usb=100
             int ret = 0;
-            //ret = SSCard.iDOpenPort(port, ref com, ierrinfo1);
-            //if (ret != 0)
-            //{
-            //    MessageBox.Show("打开端口失败" + ierrinfo1.ToString());
-            //    return;
-            //}
-            //else
+            ret = SSCard.iDOpenPort(port, ref com, ierrinfo1);
+            if (ret != 0)
+            {
+                MessageBox.Show("打开端口失败" + ierrinfo1.ToString());
+                return;
+            }
+            else
             {
                 ret = SSCard.getCardNO(IntExtension.Parse(textBox1.Text), cardno, ierrinfo);
                 if (ret != 0)
@@ -405,6 +405,15 @@ namespace CardTest
 
 
 
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            StringBuilder cardno = new StringBuilder(20480);
+            StringBuilder ierrinfo = new StringBuilder(20480);
+            var ret = SSCard.submitReqToCommService(textBox10.Text, cardno);
+            MessageBox.Show(ret.ToString());
+            MessageBox.Show(cardno.ToString());
         }
     }
 }
