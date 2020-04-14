@@ -396,15 +396,9 @@ namespace CardTest
                 }
                 else
                 {
-
                     MessageBox.Show(cardno.ToString());
-
                 }
             }
-
-
-
-
         }
 
         private void button20_Click(object sender, EventArgs e)
