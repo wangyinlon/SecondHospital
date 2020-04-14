@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -18,10 +19,11 @@ namespace CardTest
         }
 
         private IntPtr _handle;
+        private int _handle2;
         private void button1_Click(object sender, EventArgs e)
         {
-            _handle = dcrf.dc_init(IntExtension.Parse(textBox1.Text), IntExtension.Parse(textBox2.Text));
-            MessageBox.Show(_handle.ToString());
+            _handle2 = dcrf.dc_init(IntExtension.Parse(textBox1.Text), IntExtension.Parse(textBox2.Text));
+            MessageBox.Show(_handle2.ToString());
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -163,7 +165,7 @@ namespace CardTest
             }
 
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceCardEject(_handle, Convert.ToByte(textBox4.Text, 16), b);
+            var res = dcrf.dc_SelfServiceDeviceCardEject(_handle2, Convert.ToByte(textBox4.Text, 16), b);
             MessageBox.Show(res.ToString());
         }
 
@@ -187,7 +189,7 @@ namespace CardTest
                 s = "0x04";
             }
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceCardInject(_handle, Convert.ToByte(textBox4.Text, 16), b);
+            var res = dcrf.dc_SelfServiceDeviceCardInject(_handle2, Convert.ToByte(textBox4.Text, 16), b);
             MessageBox.Show(res.ToString());
         }
 
@@ -338,7 +340,7 @@ namespace CardTest
 
         private void button15_Click(object sender, EventArgs e)
         {
-            var res = dcrf.dc_exit(_handle);
+            var res = dcrf.dc_exit(_handle2);
             MessageBox.Show(res.ToString());
         }
 
@@ -408,6 +410,28 @@ namespace CardTest
             var ret = SSCard.submitReqToCommService(textBox10.Text, cardno);
             MessageBox.Show(ret.ToString());
             MessageBox.Show(cardno.ToString());
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //获取Configuration对象
+            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            
+            //根据Key读取<add>元素的Value
+            string name = config.AppSettings.Settings["Handle"].Value;
+            //写入<add>元素的Value
+            config.AppSettings.Settings["Handle"].Value = "xieyc";
+
+            //增加<add>元素
+            //config.AppSettings.Settings.Add("url", "//www.jb51.net");
+            //删除<add>元素
+            //config.AppSettings.Settings.Remove("name");
+
+
+            //一定要记得保存，写不带参数的config.Save()也可以
+            config.Save(ConfigurationSaveMode.Modified);
+            //刷新，否则程序读取的还是之前的值（可能已装入内存）
+            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }

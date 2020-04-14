@@ -35,7 +35,7 @@ namespace WebAppReadCard.Utils
         /// <param name="baud">波特率，只针对串口模式有效</param>
         /// <returns> 小于0表示失败，否则为设备标识符</returns>
         [DllImport("dcrf32.dll")]
-        public static extern IntPtr dc_init(int port, int baud);
+        public static extern int dc_init(int port, int baud);
 
      
        
@@ -55,7 +55,7 @@ namespace WebAppReadCard.Utils
         /// <param name="icdev">设备标识符</param>
         /// <returns>小于0表示失败，==0表示成功</returns>
         [DllImport("dcrf32.dll")]
-        public static extern IntPtr dc_exit(IntPtr icdev);
+        public static extern int dc_exit(int icdev);
 
 
         [DllImport("dcrf32.dll")]
@@ -130,8 +130,8 @@ namespace WebAppReadCard.Utils
         /// 检测电动卡机当前的卡片状态
         /// </summary>
         /// <param name="icdev">设备标识符</param>
-        /// <param name="pos">位置状态</param>
-        /// <returns></returns>
+        /// <param name="pos">位置状态 0x00 -无卡。 0x01 -无卡，卡在前门口。 0x10 -有卡，不 可操作任何卡。 0x11 -有卡，可操作磁条。0x12 -有卡，可操作接触。 0x14 -有卡，可操 作非接触。</param>
+        /// <returns>返回 小于0表示失败，==0表示成功。</returns>
         [DllImport("dcrf32.dll")]
         public static extern int dc_SelfServiceDeviceCardStatus(IntPtr icdev, ref byte pos);
 
@@ -153,7 +153,7 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardEject(IntPtr icdev, byte time_s, byte mode);
+        public static extern int dc_SelfServiceDeviceCardEject(int icdev, byte time_s, byte mode);
 
         /// <summary>
         /// 卡机内有接触或非接 触卡时，自动检测卡片类型
@@ -188,6 +188,6 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardInject(IntPtr icdev, byte time_s, byte mode);
+        public static extern int dc_SelfServiceDeviceCardInject(int icdev, byte time_s, byte mode);
     }
 }

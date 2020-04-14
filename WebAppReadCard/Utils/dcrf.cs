@@ -55,11 +55,11 @@ namespace WebAppReadCard.Utils
         /// <param name="icdev">设备标识符</param>
         /// <returns>小于0表示失败，==0表示成功</returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_exit(IntPtr icdev);
+        public static extern int dc_exit(int icdev);
 
 
         [DllImport("dcrf32.dll")]
-        public static extern short dc_config_card(IntPtr icdev, char cardtype);  //初试化
+        public static extern short dc_config_card(int icdev, char cardtype);  //初试化
 
         /// <summary>
         /// 读取磁条卡
@@ -73,7 +73,7 @@ namespace WebAppReadCard.Utils
         /// <param name="pTrack3Len"></param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern IntPtr dc_readmag(IntPtr icdev, byte[] pTrack1Data, ref uint pTrack1Len,  byte[] pTrack2Data, ref uint pTrack2Len,  byte[] pTrack3Data, ref uint pTrack3Len);
+        public static extern int dc_readmag(int icdev, byte[] pTrack1Data, ref uint pTrack1Len,  byte[] pTrack2Data, ref uint pTrack2Len,  byte[] pTrack3Data, ref uint pTrack3Len);
        
         /// <summary>
         /// 读取id卡
@@ -84,11 +84,11 @@ namespace WebAppReadCard.Utils
         /// <param name="rdata"></param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern IntPtr dc_ReadIdCardInfo(IntPtr icdev, int time_ms,ref int rlen, byte[] rdata);
+        public static extern int dc_ReadIdCardInfo(int icdev, int time_ms,ref int rlen, byte[] rdata);
         [DllImport("dcrf32.dll")]
-        public static extern IntPtr  dc_read_idcard(IntPtr icdev, byte times, byte[] _Data);
+        public static extern int  dc_read_idcard(int icdev, byte times, byte[] _Data);
         [DllImport("dcrf32.dll")]
-        public static extern IntPtr dc_read(IntPtr icdev ,byte __Adr ,ref byte Data);
+        public static extern int dc_read(int icdev ,byte __Adr ,ref byte Data);
 
         /// <summary>
         /// 设置前端 进卡模式
@@ -97,7 +97,7 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceConfigFront(IntPtr icdev, byte mode);
+        public static extern int dc_SelfServiceDeviceConfigFront(int icdev, byte mode);
 
         /// <summary>
         /// 设置后端进卡模式
@@ -106,7 +106,7 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceConfigBack(IntPtr icdev, byte mode);
+        public static extern int dc_SelfServiceDeviceConfigBack(int icdev, byte mode);
 
         /// <summary>
         /// 设置停卡位置
@@ -115,7 +115,7 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceConfigPlace(IntPtr icdev, byte mode);
+        public static extern int dc_SelfServiceDeviceConfigPlace(int icdev, byte mode);
 
         /// <summary>
         /// 设置掉电退卡模式
@@ -124,16 +124,16 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceConfig(IntPtr icdev, byte mode);
+        public static extern int dc_SelfServiceDeviceConfig(int icdev, byte mode);
 
         /// <summary>
         /// 检测电动卡机当前的卡片状态
         /// </summary>
         /// <param name="icdev">设备标识符</param>
-        /// <param name="pos">位置状态</param>
+        /// <param name="pos">位置状态 位置状态 0x00 -无卡。 0x01 -无卡，卡在前门口。 0x10 -有卡，不 可操作任何卡。 0x11 -有卡，可操作磁条。0x12 -有卡，可操作接触。 0x14 -有卡，可操 作非接触。</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardStatus(IntPtr icdev, ref byte pos);
+        public static extern int dc_SelfServiceDeviceCardStatus(int icdev, ref byte pos);
 
         /// <summary>
         /// 移动卡片到相应位置
@@ -143,7 +143,7 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardMove(IntPtr icdev, byte time_s, byte mode);
+        public static extern int dc_SelfServiceDeviceCardMove(int icdev, byte time_s, byte mode);
 
         /// <summary>
         /// 弹出卡片，操作前设备内无卡则错误
@@ -153,7 +153,7 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardEject(IntPtr icdev, byte time_s, byte mode);
+        public static extern int dc_SelfServiceDeviceCardEject(int icdev, byte time_s, byte mode);
 
         /// <summary>
         /// 卡机内有接触或非接 触卡时，自动检测卡片类型
@@ -161,7 +161,7 @@ namespace WebAppReadCard.Utils
         /// <param name="icdev"></param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCheckCardType(IntPtr icdev);
+        public static extern int dc_SelfServiceDeviceCheckCardType(int icdev);
 
         /// <summary>
         /// 获取电动卡机传感器的状态
@@ -170,7 +170,7 @@ namespace WebAppReadCard.Utils
         /// <param name="value">状态值</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceSensorStatus(IntPtr icdev,  byte[] value);
+        public static extern int dc_SelfServiceDeviceSensorStatus(int icdev,  byte[] value);
 
         /// <summary>
         /// 使自助设备进入上电初 始状态，设置参数为缺省参数
@@ -178,7 +178,7 @@ namespace WebAppReadCard.Utils
         /// <param name="icdev">设备标识符</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceReset(IntPtr icdev);
+        public static extern int dc_SelfServiceDeviceReset(int icdev);
 
         /// <summary>
         /// 等待进入卡片，超时退出
@@ -188,6 +188,6 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardInject(IntPtr icdev, byte time_s, byte mode);
+        public static extern int dc_SelfServiceDeviceCardInject(int icdev, byte time_s, byte mode);
     }
 }
