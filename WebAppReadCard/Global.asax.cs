@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -23,6 +24,7 @@ namespace WebAppReadCard
                     DKLXDM = "1"
                 }
             });
+            var t1 = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "/bin/WebAppReadCard.ini");
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);//支持web api，注册WebApi路由
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

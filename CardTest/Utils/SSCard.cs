@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace CardTest
+namespace CardService.Utils
 {
     /// <summary>
     /// 德卡读卡器专用类

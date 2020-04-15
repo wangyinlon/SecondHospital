@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CardService.Config;
+using YinLong.Utils.Core.Log;
 
-namespace CardTest
+namespace CardService
 {
     static class Program
     {
@@ -14,10 +16,14 @@ namespace CardTest
         [STAThread]
         static void Main()
         {
-          
-            Application.EnableVisualStyles();
+            //AppCfg.Instance.SetPath(Application.StartupPath + "\\CardService.ini");
+            Console.WriteLine(AppCfg.fileName);
+            log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(("log4net.config")));
+           
+            Log4.Debug("startup");
+            //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FrmMain());
         }
     }
 }

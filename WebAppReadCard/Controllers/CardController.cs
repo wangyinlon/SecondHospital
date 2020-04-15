@@ -41,7 +41,7 @@ namespace WebAppReadCard.Controllers
             }
             else
             {
-                UpdateHandle(handle);
+                Configs.Instance().IniWriteValue("WebAppReadCard", "Handle", handle.ToString());
                 return Content(JsonConvert.SerializeObject(new ResParameter
                 { code = ResponseCode.success, info = "打开成功", data = handle }));
             }
@@ -53,8 +53,12 @@ namespace WebAppReadCard.Controllers
         /// <returns>小于0表示失败，==0表示成功。</returns>
         public ActionResult Dc_Exit(int icdev)
         {
-            int handle = dcrf.dc_exit(icdev);
-            if (handle <= 0)
+            if (icdev <= 0)
+            {
+                icdev = Convert.ToInt32(Configs.Instance().IniReadValue("WebAppReadCard", "Handle"));
+            }
+            int res = dcrf.dc_exit(icdev);
+            if (res <= 0)
             {
                 return Content(JsonConvert.SerializeObject(new ResParameter
                 { code = ResponseCode.fail, info = "失败" }));
@@ -129,7 +133,7 @@ namespace WebAppReadCard.Controllers
         public ActionResult Dc_SelfServiceDeviceCardStatus(int icdev)
         {
             byte b = new byte();
-            var res = dcrf.dc_SelfServiceDeviceCardStatus(icdev, ref b);
+            var res = dcrf.dc_SelfServiceDeviceCardStatus(new IntPtr(  icdev), ref b);
             return Content(JsonConvert.SerializeObject(new ResParameter
             { code = ResponseCode.success, info = "成功", data = Convert.ToInt32(b) }));
 
@@ -158,16 +162,16 @@ namespace WebAppReadCard.Controllers
             int handle = dcrf.dc_init(Convert.ToInt32(port), Convert.ToInt32(baud));
             if (handle <= 0)
             {
-                handle = Convert.ToInt32(ConfigurationManager.AppSettings["Handle"]);
+                handle = Convert.ToInt32(Configs.Instance().IniReadValue("WebAppReadCard", "Handle"));
             }
             else
             {
-                UpdateHandle(handle);
+                Configs.Instance().IniWriteValue("WebAppReadCard", "Handle", handle.ToString());
             }
 
             //第2步,检测是否有卡
             byte b = new byte();
-            var res2 = dcrf.dc_SelfServiceDeviceCardStatus(handle, ref b);
+            var res2 = dcrf.dc_SelfServiceDeviceCardStatus(new IntPtr(handle), ref b);
             if (res2 != 0)
             {
                 dcrf.dc_exit(handle);
@@ -185,7 +189,7 @@ namespace WebAppReadCard.Controllers
             }
 
             //第3步,插卡
-           var res3 = dcrf.dc_SelfServiceDeviceCardInject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
+            var res3 = dcrf.dc_SelfServiceDeviceCardInject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
             if (res3 != 0)
             {
                 dcrf.dc_exit(handle);
@@ -225,26 +229,5 @@ namespace WebAppReadCard.Controllers
             { code = ResponseCode.success, info = "第7步,关闭端口", data = $"res5{res5},res6{res6},res7{res7},responseXml{responseXml}" }));
         }
 
-        private void UpdateHandle(int handle)
-        {
-            //获取Configuration对象
-            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            //根据Key读取<add>元素的Value
-            //string name = config.AppSettings.Settings["Handle"].Value;
-            //写入<add>元素的Value
-            config.AppSettings.Settings["Handle"].Value = handle.ToString();
-
-            //增加<add>元素
-            //config.AppSettings.Settings.Add("url", "//www.jb51.net");
-            //删除<add>元素
-            //config.AppSettings.Settings.Remove("name");
-
-
-            //一定要记得保存，写不带参数的config.Save()也可以
-            config.Save(ConfigurationSaveMode.Modified);
-            //刷新，否则程序读取的还是之前的值（可能已装入内存）
-            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
-        }
     }
 }

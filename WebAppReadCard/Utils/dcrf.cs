@@ -133,7 +133,7 @@ namespace WebAppReadCard.Utils
         /// <param name="pos">位置状态 位置状态 0x00 -无卡。 0x01 -无卡，卡在前门口。 0x10 -有卡，不 可操作任何卡。 0x11 -有卡，可操作磁条。0x12 -有卡，可操作接触。 0x14 -有卡，可操 作非接触。</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardStatus(int icdev, ref byte pos);
+        public static extern int dc_SelfServiceDeviceCardStatus(IntPtr icdev, ref byte pos);
 
         /// <summary>
         /// 移动卡片到相应位置

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Web;
 
-namespace WebAppReadCard.Utils
+namespace CardService.Utils
 {
     public class dcrf
     {
@@ -35,7 +35,7 @@ namespace WebAppReadCard.Utils
         /// <param name="baud">波特率，只针对串口模式有效</param>
         /// <returns> 小于0表示失败，否则为设备标识符</returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_init(int port, int baud);
+        public static extern IntPtr dc_init(int port, int baud);
 
      
        
@@ -55,7 +55,7 @@ namespace WebAppReadCard.Utils
         /// <param name="icdev">设备标识符</param>
         /// <returns>小于0表示失败，==0表示成功</returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_exit(int icdev);
+        public static extern int dc_exit(IntPtr icdev);
 
 
         [DllImport("dcrf32.dll")]
@@ -153,7 +153,7 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardEject(int icdev, byte time_s, byte mode);
+        public static extern int dc_SelfServiceDeviceCardEject(IntPtr icdev, byte time_s, byte mode);
 
         /// <summary>
         /// 卡机内有接触或非接 触卡时，自动检测卡片类型
@@ -188,6 +188,6 @@ namespace WebAppReadCard.Utils
         /// <param name="mode">模式</param>
         /// <returns></returns>
         [DllImport("dcrf32.dll")]
-        public static extern int dc_SelfServiceDeviceCardInject(int icdev, byte time_s, byte mode);
+        public static extern int dc_SelfServiceDeviceCardInject(IntPtr icdev, byte time_s, byte mode);
     }
 }

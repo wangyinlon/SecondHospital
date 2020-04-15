@@ -7,23 +7,30 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using WebAppReadCard.Utils;
+using CardService.Config;
+using CardService.Model;
+using CardService.Utils;
+using HZH_Controls;
+using HZH_Controls.Forms;
+using Nancy.Hosting.Self;
 using YinLong.Utils.Core.Extensions;
-namespace CardTest
+using YinLong.Utils.Core.Ui;
+
+namespace CardService
 {
-    public partial class Form1 : Form
+    public partial class FrmMain : Form
     {
-        public Form1()
+        public FrmMain()
         {
             InitializeComponent();
         }
 
-        private IntPtr _handle;
-        private int _handle2;
+
+        private NancyHost nancySelfHost;
         private void button1_Click(object sender, EventArgs e)
         {
-            _handle2 = dcrf.dc_init(IntExtension.Parse(textBox1.Text), IntExtension.Parse(textBox2.Text));
-            MessageBox.Show(_handle2.ToString());
+            Configs.Handle = dcrf.dc_init(IntExtension.Parse(textBox1.Text), IntExtension.Parse(textBox2.Text));
+            MessageBox.Show(Configs.Handle.ToString());
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -33,13 +40,21 @@ namespace CardTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            AppReportManager.Instance.AddListener<LogEntity>(DoLogResult);
             byte data1 = 0;
             textBox6.Text = data1.ToString();
+            关闭服务ToolStripMenuItem.Enabled = false;
         }
-
+        void DoLogResult(LogEntity resultEntity)
+        {
+            this.Invoke(new MethodInvoker(delegate
+            {
+               toolStripStatusLabel1.Text =($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo)}]  " + resultEntity.Log );
+            }));
+        }
         private void button4_Click(object sender, EventArgs e)
         {
-            var res = dcrf.dc_SelfServiceDeviceReset(_handle);
+            var res = dcrf.dc_SelfServiceDeviceReset(Configs.Handle);
             MessageBox.Show(res.ToString());
         }
 
@@ -63,7 +78,7 @@ namespace CardTest
                 s = "0x03";
             }
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceConfigFront(_handle, b);
+            var res = dcrf.dc_SelfServiceDeviceConfigFront(Configs.Handle, b);
             MessageBox.Show(res.ToString());
         }
 
@@ -95,7 +110,7 @@ namespace CardTest
                 s = "0x05";
             }
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceConfigPlace(_handle, b);
+            var res = dcrf.dc_SelfServiceDeviceConfigPlace(Configs.Handle, b);
             MessageBox.Show(res.ToString());
         }
 
@@ -116,14 +131,14 @@ namespace CardTest
             }
 
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceConfig(_handle, b);
+            var res = dcrf.dc_SelfServiceDeviceConfig(Configs.Handle, b);
             MessageBox.Show(res.ToString());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             byte b = new byte();
-            var res = dcrf.dc_SelfServiceDeviceCardStatus(_handle, ref b);
+            var res = dcrf.dc_SelfServiceDeviceCardStatus(Configs.Handle, ref b);
             MessageBox.Show(res.ToString() + "\r\n" + b);
         }
 
@@ -144,7 +159,7 @@ namespace CardTest
             }
 
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceCardMove(_handle, Convert.ToByte(textBox3.Text, 16), b);
+            var res = dcrf.dc_SelfServiceDeviceCardMove(Configs.Handle, Convert.ToByte(textBox3.Text, 16), b);
             MessageBox.Show(res.ToString());
         }
 
@@ -165,7 +180,7 @@ namespace CardTest
             }
 
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceCardEject(_handle2, Convert.ToByte(textBox4.Text, 16), b);
+            var res = dcrf.dc_SelfServiceDeviceCardEject(Configs.Handle, Convert.ToByte(textBox4.Text, 16), b);
             MessageBox.Show(res.ToString());
         }
 
@@ -189,14 +204,14 @@ namespace CardTest
                 s = "0x04";
             }
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceCardInject(_handle2, Convert.ToByte(textBox4.Text, 16), b);
+            var res = dcrf.dc_SelfServiceDeviceCardInject(Configs.Handle, Convert.ToByte(textBox4.Text, 16), b);
             MessageBox.Show(res.ToString());
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
 
-            var res = dcrf.dc_SelfServiceDeviceCheckCardType(_handle);
+            var res = dcrf.dc_SelfServiceDeviceCheckCardType(Configs.Handle);
             MessageBox.Show(res.ToString());
         }
 
@@ -205,12 +220,12 @@ namespace CardTest
             try
             {
                 byte[] data1 = new byte[8];
-                byte[] data2 = new byte[8];
-                byte[] data3 = new byte[8];
+                byte[] data2 = new byte[1024];
+                byte[] data3 = new byte[1024];
                 uint len1 = 0;
                 uint len2 = 0;
                 uint len3 = 0;
-                var res = dcrf.dc_readmag(_handle, data1, ref len1, data2, ref len2,
+                var res = dcrf.dc_readmag(Configs.Handle, data1, ref len1, data2, ref len2,
                      data3, ref len3);
 
                 MessageBox.Show("len1=>" + len1.ToString() + "\r\n" +
@@ -314,7 +329,7 @@ namespace CardTest
             }
 
             byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceConfigBack(_handle, b);
+            var res = dcrf.dc_SelfServiceDeviceConfigBack(Configs.Handle, b);
             MessageBox.Show(res.ToString());
         }
 
@@ -327,7 +342,7 @@ namespace CardTest
         {
             byte[] value = new byte[8];
 
-            var res = dcrf.dc_SelfServiceDeviceSensorStatus(_handle, value);
+            var res = dcrf.dc_SelfServiceDeviceSensorStatus(Configs.Handle, value);
             textBox9.Text = $"电闸门:{value[0]}\r\n压卡传感器:{value[1]}\r\n" +
                             $"传感器1:{value[2]}\r\n" +
                             $"传感器2:{value[3]}\r\n" +
@@ -340,39 +355,14 @@ namespace CardTest
 
         private void button15_Click(object sender, EventArgs e)
         {
-            var res = dcrf.dc_exit(_handle2);
+            var res = dcrf.dc_exit(Configs.Handle);
             MessageBox.Show(res.ToString());
         }
 
-        private void button16_Click(object sender, EventArgs e)
-        {
-            byte[] data1 = new byte[8];
-            int len1 = 0;
-            var res = dcrf.dc_read_idcard(_handle, 10, data1);
 
-            MessageBox.Show(res.ToString());
-            MessageBox.Show(Encoding.Default.GetString(data1));
 
-        }
 
-        private void button17_Click(object sender, EventArgs e)
-        {
-            byte[] data1 = new byte[8];
-            int len1 = 0;
-            var res = dcrf.dc_ReadIdCardInfo(_handle, 10, ref len1, data1);
 
-            MessageBox.Show(res.ToString());
-            MessageBox.Show(Encoding.Default.GetString(data1));
-
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            StringBuilder myStrB = new StringBuilder(20480);
-
-            SSCard.iReadCardBas(1, myStrB);
-            MessageBox.Show(myStrB.ToString());
-        }
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -412,26 +402,48 @@ namespace CardTest
             MessageBox.Show(cardno.ToString());
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void 端口配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //获取Configuration对象
-            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            
-            //根据Key读取<add>元素的Value
-            string name = config.AppSettings.Settings["Handle"].Value;
-            //写入<add>元素的Value
-            config.AppSettings.Settings["Handle"].Value = "xieyc";
+            Console.WriteLine(AppCfg.fileName);
+            string[] input = new[] { "端口号" };
 
-            //增加<add>元素
-            //config.AppSettings.Settings.Add("url", "//www.jb51.net");
-            //删除<add>元素
-            //config.AppSettings.Settings.Remove("name");
+            Dictionary<string, TextInputType> dic = new Dictionary<string, TextInputType>();
+            dic.Add("端口号", TextInputType.Number);
 
+            Dictionary<string, string> defalut = new Dictionary<string, string>();
+            defalut.Add("端口号", AppCfg.Instance.Port.ToString());
 
-            //一定要记得保存，写不带参数的config.Save()也可以
-            config.Save(ConfigurationSaveMode.Modified);
-            //刷新，否则程序读取的还是之前的值（可能已装入内存）
-            System.Configuration.ConfigurationManager.RefreshSection("appSettings");
+            FrmInputs frm = new FrmInputs("端口配置", input, dic, null, null, null, defalut);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                AppCfg.Instance.Port = IntExtension.Parse(frm.Values[0]);
+                AppCfg.Instance.Save();
+            }
+
+        }
+
+        private void 开启服务ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HostConfiguration hostConfig = new HostConfiguration()
+            {
+                UrlReservations = new UrlReservations()
+                {
+                    //create URL reservations automatically
+                    CreateAutomatically = true
+                }
+            };
+            Uri uri = new Uri("http://localhost:" + AppCfg.Instance.Port);
+            nancySelfHost = new NancyHost(hostConfig, uri);
+            nancySelfHost.Start();
+            开启服务ToolStripMenuItem.Enabled = false;
+            关闭服务ToolStripMenuItem.Enabled = true;
+        }
+
+        private void 关闭服务ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nancySelfHost.Stop();
+            开启服务ToolStripMenuItem.Enabled = true;
+            关闭服务ToolStripMenuItem.Enabled = false;
         }
     }
 }
