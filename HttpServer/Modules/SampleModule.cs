@@ -26,8 +26,19 @@ namespace HttpServer.Modules
                 return "hello world";
             };
             Get["/call"] = Call;
+            Get["/run"] = Run;
         }
+        private Response Run(dynamic _)
+        {
+            //var name = Request.Query["Name"];//get请求获取方法
 
+            string msg = getPara("path");
+            System.Diagnostics.Process proc = System.Diagnostics.Process.Start(msg);
+           
+            Log4.Debug("成功");
+            AppReportManager.Instance.Send(new LogEntity() { Log = "成功" });
+            return Success("成功");
+        }
 
         private Response Call(dynamic _)
         {
