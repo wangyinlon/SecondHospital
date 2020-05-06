@@ -40,16 +40,27 @@ namespace CardService
 
         private void Form1_Load(object sender, EventArgs e)
         {
+           
             AppReportManager.Instance.AddListener<LogEntity>(DoLogResult);
             byte data1 = 0;
             textBox6.Text = data1.ToString();
             关闭服务ToolStripMenuItem.Enabled = false;
+            if (AppCfg.Instance.SelfStart)
+            {
+                开机启动ToolStripMenuItem.Checked = true;
+                this.WindowState = FormWindowState.Minimized;
+                开启服务ToolStripMenuItem.PerformClick();
+            }
+            else
+            {
+                开机启动ToolStripMenuItem.Checked = false;
+            }
         }
         void DoLogResult(LogEntity resultEntity)
         {
             this.Invoke(new MethodInvoker(delegate
             {
-               toolStripStatusLabel1.Text =($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo)}]  " + resultEntity.Log );
+                toolStripStatusLabel1.Text = ($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo)}]  " + resultEntity.Log);
             }));
         }
         private void button4_Click(object sender, EventArgs e)
@@ -444,6 +455,70 @@ namespace CardService
             nancySelfHost.Stop();
             开启服务ToolStripMenuItem.Enabled = true;
             关闭服务ToolStripMenuItem.Enabled = false;
+        }
+
+        private void 开机启动ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (开机启动ToolStripMenuItem.Checked)
+            {
+                开机启动ToolStripMenuItem.Checked = false;
+                AppCfg.Instance.SelfStart = false;
+                SelfStaring.CancelSelfStarting();
+            }
+            else
+            {
+                开机启动ToolStripMenuItem.Checked = true;
+                AppCfg.Instance.SelfStart = true;
+                SelfStaring.SetSelfStarting();
+            }
+            AppCfg.Instance.Save();
+        }
+
+        private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //还原窗体显示    
+                WindowState = FormWindowState.Normal;
+                //激活窗体并给予它焦点
+                this.Activate();
+                //任务栏区显示图标
+                this.ShowInTaskbar = true;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //还原窗体显示    
+                WindowState = FormWindowState.Normal;
+                //激活窗体并给予它焦点
+                this.Activate();
+                //任务栏区显示图标
+                this.ShowInTaskbar = true;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void FrmMain_SizeChanged(object sender, EventArgs e)
+        {
+            //判断是否选择的是最小化按钮
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //隐藏任务栏区图标
+                this.ShowInTaskbar = false;
+                //图标显示在托盘区
+                notifyIcon1.Visible = true;
+            }
         }
     }
 }

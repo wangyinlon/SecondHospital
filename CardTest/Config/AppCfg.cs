@@ -12,12 +12,13 @@ namespace CardService.Config
         public AppCfg()
         {
             Port = 9999;
- 
+            
         }
         /// <summary>
         /// 端口
         /// </summary>
         public int Port { get; set; }
+        public bool SelfStart { get; set; }
         //public IntPtr Handle { get; set; }
     }
 }
