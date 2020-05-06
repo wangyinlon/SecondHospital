@@ -15,6 +15,8 @@ using YinLong.Utils.Core.Ui;
 using CardService.Utils;
 using MT.Library.Parameter;
 using Newtonsoft.Json;
+using System.IO;
+using System.Windows.Forms;
 
 namespace CardService.Modules
 {
@@ -31,8 +33,19 @@ namespace CardService.Modules
                 return "hello world";
             };
             Get["/call"] = Call;
+            Get["/call1"] = Call1;
         }
-
+        private Response Call1(dynamic _)
+        {
+           var card= YinLong.Utils.Core.Serialize.XMLSerializer.XmlDeserialize<NeuqPayResponse<CardInfo>>(Application.StartupPath + "/XMLFile1.xml");
+            return Success(new
+            {
+                log = $"第7步,关闭端口res50",
+                card.responsedata.RETURNCODE,
+                card.responsedata.SCARDNO ,
+                card.responsedata.NAME
+            });
+        }
 
         private Response Call(dynamic _)
         {
@@ -118,7 +131,12 @@ namespace CardService.Modules
             //第7步,关闭端口
             Log4.Debug("第7步,关闭端口--------");
             var res7 = dcrf.dc_exit(handle);
-            return Success($"第7步,关闭端口res5{res5},res6{res6},res7{res7},responseXml{responseXml}");
+            //$"第7步,关闭端口res5{res5},res6{res6},res7{res7},responseXml{responseXml}"
+            return Success(JsonConvert.SerializeObject(new
+            {
+                Resopne = $"第7步,关闭端口res5{res5},res6{res6},res7{res7}",
+                ResponseXml = responseXml
+            }));
 
         }
 

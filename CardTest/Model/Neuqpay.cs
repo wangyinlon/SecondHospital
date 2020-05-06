@@ -19,4 +19,27 @@ namespace CardService.Model
             set;
         }
     }
+    [XmlRoot(ElementName = "neuqpay")]
+    public class NeuqPayResponse<T>
+    {
+        /// <summary>
+        ///
+        /// </summary>
+        [XmlElement(ElementName = "responsedata")]
+        public T responsedata
+        {
+            get;
+            set;
+        }
+    }
+    public class CardInfo
+    {
+        [XmlElement(ElementName = "RETURNCODE")]
+        public string RETURNCODE { get; set; } 
+        [XmlElement(ElementName = "SCARDNO")]
+        public string SCARDNO { get; set; } = "";
+        [XmlElement(ElementName = "NAME")]
+        public string NAME { get; set; } = "";
+    }
+    
 }
