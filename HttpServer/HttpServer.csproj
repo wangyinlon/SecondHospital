@@ -90,6 +90,7 @@
     <Compile Include="Utils\Extensions.Json.cs" />
     <Compile Include="Utils\JsonDynamicUtil.cs" />
     <Compile Include="Utils\JTTS_ML.cs" />
+    <Compile Include="Utils\SelfStaring.cs" />
     <EmbeddedResource Include="DlgInit.resx">
       <DependentUpon>DlgInit.cs</DependentUpon>
     </EmbeddedResource>

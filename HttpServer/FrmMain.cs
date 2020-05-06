@@ -15,6 +15,7 @@ using YinLong.Utils.Core.Extensions;
 using InfoQuick.SinoVoice.Tts;
 using jTTS4_Demo;
 using System.IO;
+using CardService.Utils;
 
 namespace HttpServer
 {
@@ -50,7 +51,16 @@ namespace HttpServer
         {
             textBoxPort.Text = AppCfg.Instance.Port.ToString();
             AppReportManager.Instance.AddListener<LogEntity>(DoLogResult);
-
+            if (AppCfg.Instance.SelfStart)
+            {
+                开机启动ToolStripMenuItem.Checked = true;
+                this.WindowState = FormWindowState.Minimized;
+                button1.PerformClick();
+            }
+            else
+            {
+                开机启动ToolStripMenuItem.Checked = false;
+            }
 
         }
 
@@ -255,6 +265,70 @@ namespace HttpServer
             {
                 MessageBox.Show("完成");
             }
+        }
+
+        private void FrmMain_SizeChanged(object sender, EventArgs e)
+        {
+            //判断是否选择的是最小化按钮
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //隐藏任务栏区图标
+                this.ShowInTaskbar = false;
+                //图标显示在托盘区
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //还原窗体显示    
+                WindowState = FormWindowState.Normal;
+                //激活窗体并给予它焦点
+                this.Activate();
+                //任务栏区显示图标
+                this.ShowInTaskbar = true;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //还原窗体显示    
+                WindowState = FormWindowState.Normal;
+                //激活窗体并给予它焦点
+                this.Activate();
+                //任务栏区显示图标
+                this.ShowInTaskbar = true;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void 开机启动ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (开机启动ToolStripMenuItem.Checked)
+            {
+                开机启动ToolStripMenuItem.Checked = false;
+                AppCfg.Instance.SelfStart = false;
+                SelfStaring.CancelSelfStarting();
+            }
+            else
+            {
+                开机启动ToolStripMenuItem.Checked = true;
+                AppCfg.Instance.SelfStart = true;
+                SelfStaring.SetSelfStarting();
+            }
+            AppCfg.Instance.Save();
         }
     }
 }

@@ -18,6 +18,6 @@ namespace HttpServer.Config
         /// 端口
         /// </summary>
         public int Port { get; set; }
-       
+        public bool SelfStart { get; set; }
     }
 }

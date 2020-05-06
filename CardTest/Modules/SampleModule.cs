@@ -121,10 +121,10 @@ namespace CardService.Modules
                 }
             });
             var res5 = SSCard.submitReqToCommService(inputXml, responseXml);
+            var card = YinLong.Utils.Core.Serialize.XMLSerializer.DeserializeFromXmlString<NeuqPayResponse<CardInfo>>(responseXml.ToString());
 
-
-            //第6步,弹卡
-            handle = dcrf.dc_init(Convert.ToInt32(port), Convert.ToInt32(baud));
+           //第6步,弹卡
+           handle = dcrf.dc_init(Convert.ToInt32(port), Convert.ToInt32(baud));
             Log4.Debug("第6步,弹卡--------");
             var res6 = dcrf.dc_SelfServiceDeviceCardEject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
 
@@ -132,12 +132,14 @@ namespace CardService.Modules
             Log4.Debug("第7步,关闭端口--------");
             var res7 = dcrf.dc_exit(handle);
             //$"第7步,关闭端口res5{res5},res6{res6},res7{res7},responseXml{responseXml}"
-            return Success(JsonConvert.SerializeObject(new
+            
+            return Success(new
             {
-                Resopne = $"第7步,关闭端口res5{res5},res6{res6},res7{res7}",
-                ResponseXml = responseXml
-            }));
-
+                log = $"第7步,关闭端口res5{res5},res6{res6},res7{res7}",
+                card.responsedata.RETURNCODE,
+                card.responsedata.SCARDNO,
+                card.responsedata.NAME
+            });
         }
 
     }
