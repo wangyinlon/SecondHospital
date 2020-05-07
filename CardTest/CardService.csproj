@@ -35,6 +35,9 @@
     <ApplicationIcon>log.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoUpdater.NET, Version=1.6.0.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autoupdater.NET.Official.1.6.0\lib\net40\AutoUpdater.NET.dll</HintPath>
+    </Reference>
     <Reference Include="HZH_Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HZH_Controls.1.0.11\lib\net40\HZH_Controls.dll</HintPath>
     </Reference>
@@ -62,10 +65,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="YinLong.Utils.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\YinLong.Utils.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\AppCfg.cs" />
@@ -121,6 +120,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CardUpdate.xml" />
     <Content Include="dcrf32.dll" />
     <Content Include="log.ico" />
     <Content Include="XMLFile1.xml">
@@ -131,6 +131,12 @@
   <ItemGroup>
     <Folder Include="Parameter\" />
     <Folder Include="Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DotNet\DotNet_WorkSpace\YinLong.Framework\YinLong.Utils.Core\YinLong.Utils.Core.csproj">
+      <Project>{5f0bdbeb-bae2-45f9-8ff1-ca0898e50ddd}</Project>
+      <Name>YinLong.Utils.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

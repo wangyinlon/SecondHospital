@@ -106,14 +106,17 @@
             this.端口配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开启服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关闭服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.接口地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -852,11 +855,11 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(682, 327);
+            this.textBox10.Location = new System.Drawing.Point(682, 313);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
             this.textBox10.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox10.Size = new System.Drawing.Size(312, 188);
+            this.textBox10.Size = new System.Drawing.Size(312, 149);
             this.textBox10.TabIndex = 18;
             this.textBox10.Text = resources.GetString("textBox10.Text");
             // 
@@ -874,7 +877,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.服务配置ToolStripMenuItem,
-            this.设置ToolStripMenuItem});
+            this.设置ToolStripMenuItem,
+            this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1006, 25);
@@ -894,23 +898,38 @@
             // 端口配置ToolStripMenuItem
             // 
             this.端口配置ToolStripMenuItem.Name = "端口配置ToolStripMenuItem";
-            this.端口配置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.端口配置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.端口配置ToolStripMenuItem.Text = "端口配置";
             this.端口配置ToolStripMenuItem.Click += new System.EventHandler(this.端口配置ToolStripMenuItem_Click);
             // 
             // 开启服务ToolStripMenuItem
             // 
             this.开启服务ToolStripMenuItem.Name = "开启服务ToolStripMenuItem";
-            this.开启服务ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.开启服务ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.开启服务ToolStripMenuItem.Text = "开启服务";
             this.开启服务ToolStripMenuItem.Click += new System.EventHandler(this.开启服务ToolStripMenuItem_Click);
             // 
             // 关闭服务ToolStripMenuItem
             // 
             this.关闭服务ToolStripMenuItem.Name = "关闭服务ToolStripMenuItem";
-            this.关闭服务ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.关闭服务ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.关闭服务ToolStripMenuItem.Text = "关闭服务";
             this.关闭服务ToolStripMenuItem.Click += new System.EventHandler(this.关闭服务ToolStripMenuItem_Click);
+            // 
+            // 设置ToolStripMenuItem
+            // 
+            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开机启动ToolStripMenuItem});
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.设置ToolStripMenuItem.Text = "设置";
+            // 
+            // 开机启动ToolStripMenuItem
+            // 
+            this.开机启动ToolStripMenuItem.Name = "开机启动ToolStripMenuItem";
+            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.开机启动ToolStripMenuItem.Text = "开机启动";
+            this.开机启动ToolStripMenuItem.Click += new System.EventHandler(this.开机启动ToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -925,23 +944,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // 设置ToolStripMenuItem
-            // 
-            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.开机启动ToolStripMenuItem});
-            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.设置ToolStripMenuItem.Text = "设置";
-            // 
-            // 开机启动ToolStripMenuItem
-            // 
-            this.开机启动ToolStripMenuItem.Name = "开机启动ToolStripMenuItem";
-            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.开机启动ToolStripMenuItem.Text = "开机启动";
-            this.开机启动ToolStripMenuItem.Click += new System.EventHandler(this.开机启动ToolStripMenuItem_Click);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
+            this.toolStripStatusLabel1.Text = "状态";
             // 
             // notifyIcon1
             // 
@@ -962,22 +966,47 @@
             // 显示ToolStripMenuItem
             // 
             this.显示ToolStripMenuItem.Name = "显示ToolStripMenuItem";
-            this.显示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.显示ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.显示ToolStripMenuItem.Text = "显示";
             this.显示ToolStripMenuItem.Click += new System.EventHandler(this.显示ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
+            // 
+            // textBoxLog
+            // 
+            this.textBoxLog.Location = new System.Drawing.Point(666, 468);
+            this.textBoxLog.Multiline = true;
+            this.textBoxLog.Name = "textBoxLog";
+            this.textBoxLog.ReadOnly = true;
+            this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxLog.Size = new System.Drawing.Size(328, 256);
+            this.textBoxLog.TabIndex = 25;
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.接口地址ToolStripMenuItem});
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // 接口地址ToolStripMenuItem
+            // 
+            this.接口地址ToolStripMenuItem.Name = "接口地址ToolStripMenuItem";
+            this.接口地址ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.接口地址ToolStripMenuItem.Text = "接口地址";
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 749);
+            this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.textBox10);
@@ -1121,6 +1150,9 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 显示ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBoxLog;
+        private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 接口地址ToolStripMenuItem;
     }
 }
 

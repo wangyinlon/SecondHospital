@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using CardService.Config;
 using CardService.Model;
 using CardService.Utils;
@@ -23,6 +24,22 @@ namespace CardService
         public FrmMain()
         {
             InitializeComponent();
+
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["UpdateOpen"]))
+            {
+                System.Timers.Timer timer = new System.Timers.Timer
+                {
+                    Interval = 60 * 1000 * Convert.ToInt32(ConfigurationManager.AppSettings["UpdateInterval"]),
+                    SynchronizingObject = this
+                };
+                timer.Elapsed += delegate
+                {
+                    AutoUpdater.Start(ConfigurationManager.AppSettings["UpdateServer"]);
+                };
+                timer.Start();
+            }
+
+            //AutoUpdater.Start(ConfigurationManager.AppSettings["UpdateServer"]);
         }
 
 
@@ -40,7 +57,7 @@ namespace CardService
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
             AppReportManager.Instance.AddListener<LogEntity>(DoLogResult);
             byte data1 = 0;
             textBox6.Text = data1.ToString();
@@ -60,8 +77,11 @@ namespace CardService
         {
             this.Invoke(new MethodInvoker(delegate
             {
-                toolStripStatusLabel1.Text = ($"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo)}]  " + resultEntity.Log);
+                textBoxLog.AppendText(
+                    $"[{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo)}]  "
+                    + resultEntity.Log + "\r\n");
             }));
+
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -415,7 +435,7 @@ namespace CardService
 
         private void 端口配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(AppCfg.fileName);
+            //Console.WriteLine(AppCfg.fileName);
             string[] input = new[] { "端口号" };
 
             Dictionary<string, TextInputType> dic = new Dictionary<string, TextInputType>();

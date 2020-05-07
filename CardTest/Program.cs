@@ -16,8 +16,7 @@ namespace CardService
         [STAThread]
         static void Main()
         {
-            //AppCfg.Instance.SetPath(Application.StartupPath + "\\CardService.ini");
-            Console.WriteLine(AppCfg.fileName);
+  
             log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(("log4net.config")));
            
             Log4.Debug("startup");
