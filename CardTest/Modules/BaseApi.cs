@@ -19,6 +19,7 @@ namespace CardService.Modules
         public BaseApi()
             : base()
         {
+           
             Before += BeforeRequest;
             After += AfterRequest;
             //After += async (ctx, ct) =>

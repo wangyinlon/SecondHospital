@@ -69,10 +69,12 @@
   <ItemGroup>
     <Compile Include="Config\AppCfg.cs" />
     <Compile Include="Config\Configs.cs" />
+    <Compile Include="Extensions\RichTextBoxExtension.cs" />
     <Compile Include="Model\LogEntity.cs" />
     <Compile Include="Model\Neuqpay.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Modules\BaseApi.cs" />
+    <Compile Include="Modules\DocMudule.cs" />
     <Compile Include="Modules\ReqParameter.cs" />
     <Compile Include="Modules\ResParameter.cs" />
     <Compile Include="Modules\ResponseCode.cs" />
@@ -91,6 +93,12 @@
     <Compile Include="Utils\SelfStaring.cs" />
     <Compile Include="Utils\SSCard.cs" />
     <Compile Include="Utils\XmlSerialization.cs" />
+    <Compile Include="Views\FrmApi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FrmApi.Designer.cs">
+      <DependentUpon>FrmApi.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +112,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\FrmApi.resx">
+      <DependentUpon>FrmApi.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -130,7 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Parameter\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\DotNet\DotNet_WorkSpace\YinLong.Framework\YinLong.Utils.Core\YinLong.Utils.Core.csproj">

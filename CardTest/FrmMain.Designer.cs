@@ -108,6 +108,11 @@
             this.关闭服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开所在ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.接口地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neuqpayServicelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -115,8 +120,10 @@
             this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxLog = new System.Windows.Forms.TextBox();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.接口地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开日志目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.错误日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -134,9 +141,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(19, 53);
+            this.button1.Location = new System.Drawing.Point(25, 66);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 29);
             this.button1.TabIndex = 0;
             this.button1.Text = "打开端口";
             this.button1.UseVisualStyleBackColor = true;
@@ -150,18 +158,21 @@
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 59);
+            this.groupBox1.Location = new System.Drawing.Point(16, 74);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(313, 89);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(417, 111);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "初始化";
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(150, 54);
+            this.button15.Location = new System.Drawing.Point(200, 68);
+            this.button15.Margin = new System.Windows.Forms.Padding(4);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(75, 23);
+            this.button15.Size = new System.Drawing.Size(100, 29);
             this.button15.TabIndex = 4;
             this.button15.Text = "关闭端口";
             this.button15.UseVisualStyleBackColor = true;
@@ -170,35 +181,39 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(148, 30);
+            this.label2.Location = new System.Drawing.Point(197, 38);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(52, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "波特率";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 30);
+            this.label1.Location = new System.Drawing.Point(25, 38);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(52, 15);
             this.label1.TabIndex = 3;
             this.label1.Text = "端口号";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(210, 26);
+            this.textBox2.Location = new System.Drawing.Point(280, 32);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(59, 21);
+            this.textBox2.Size = new System.Drawing.Size(77, 25);
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = "9600";
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(70, 26);
+            this.textBox1.Location = new System.Drawing.Point(93, 32);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(59, 21);
+            this.textBox1.Size = new System.Drawing.Size(77, 25);
             this.textBox1.TabIndex = 1;
             // 
             // groupBox2
@@ -208,18 +223,21 @@
             this.groupBox2.Controls.Add(this.radioButton3);
             this.groupBox2.Controls.Add(this.radioButton2);
             this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Location = new System.Drawing.Point(347, 468);
+            this.groupBox2.Location = new System.Drawing.Point(463, 585);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(313, 124);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(417, 155);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "设置前端进卡模式";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(19, 90);
+            this.button2.Location = new System.Drawing.Point(25, 112);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 29);
             this.button2.TabIndex = 4;
             this.button2.Text = "设置";
             this.button2.UseVisualStyleBackColor = true;
@@ -228,9 +246,10 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(149, 66);
+            this.radioButton4.Location = new System.Drawing.Point(199, 82);
+            this.radioButton4.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(131, 16);
+            this.radioButton4.Size = new System.Drawing.Size(163, 19);
             this.radioButton4.TabIndex = 3;
             this.radioButton4.Text = "前端磁信号方式进卡";
             this.radioButton4.UseVisualStyleBackColor = true;
@@ -238,9 +257,10 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(19, 66);
+            this.radioButton3.Location = new System.Drawing.Point(25, 82);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(119, 16);
+            this.radioButton3.Size = new System.Drawing.Size(148, 19);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.Text = "前端开关方式进卡";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -248,9 +268,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(149, 32);
+            this.radioButton2.Location = new System.Drawing.Point(199, 40);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(119, 16);
+            this.radioButton2.Size = new System.Drawing.Size(148, 19);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Text = "前端磁卡方式进卡";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -259,9 +280,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(19, 32);
+            this.radioButton1.Location = new System.Drawing.Point(25, 40);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(95, 16);
+            this.radioButton1.Size = new System.Drawing.Size(118, 19);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "前端禁止进卡";
@@ -276,18 +298,21 @@
             this.groupBox3.Controls.Add(this.radioButton7);
             this.groupBox3.Controls.Add(this.radioButton6);
             this.groupBox3.Controls.Add(this.radioButton5);
-            this.groupBox3.Location = new System.Drawing.Point(682, 50);
+            this.groupBox3.Location = new System.Drawing.Point(909, 62);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(312, 141);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(416, 176);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "设置停卡位置";
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(19, 108);
+            this.button6.Location = new System.Drawing.Point(25, 135);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(100, 29);
             this.button6.TabIndex = 6;
             this.button6.Text = "设置";
             this.button6.UseVisualStyleBackColor = true;
@@ -296,9 +321,10 @@
             // radioButton10
             // 
             this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(149, 79);
+            this.radioButton10.Location = new System.Drawing.Point(199, 99);
+            this.radioButton10.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(83, 16);
+            this.radioButton10.Size = new System.Drawing.Size(103, 19);
             this.radioButton10.TabIndex = 5;
             this.radioButton10.Text = "弹卡到后端";
             this.radioButton10.UseVisualStyleBackColor = true;
@@ -307,9 +333,10 @@
             // 
             this.radioButton9.AutoSize = true;
             this.radioButton9.Checked = true;
-            this.radioButton9.Location = new System.Drawing.Point(19, 79);
+            this.radioButton9.Location = new System.Drawing.Point(25, 99);
+            this.radioButton9.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(59, 16);
+            this.radioButton9.Size = new System.Drawing.Size(73, 19);
             this.radioButton9.TabIndex = 4;
             this.radioButton9.TabStop = true;
             this.radioButton9.Text = "磁卡位";
@@ -318,9 +345,10 @@
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(149, 54);
+            this.radioButton8.Location = new System.Drawing.Point(199, 68);
+            this.radioButton8.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(71, 16);
+            this.radioButton8.Size = new System.Drawing.Size(88, 19);
             this.radioButton8.TabIndex = 3;
             this.radioButton8.Text = "射频卡位";
             this.radioButton8.UseVisualStyleBackColor = true;
@@ -328,9 +356,10 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(19, 54);
+            this.radioButton7.Location = new System.Drawing.Point(25, 68);
+            this.radioButton7.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(83, 16);
+            this.radioButton7.Size = new System.Drawing.Size(104, 19);
             this.radioButton7.TabIndex = 2;
             this.radioButton7.Text = "接触IC卡位";
             this.radioButton7.UseVisualStyleBackColor = true;
@@ -338,9 +367,10 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(149, 26);
+            this.radioButton6.Location = new System.Drawing.Point(199, 32);
+            this.radioButton6.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(71, 16);
+            this.radioButton6.Size = new System.Drawing.Size(88, 19);
             this.radioButton6.TabIndex = 1;
             this.radioButton6.Text = "前端夹卡";
             this.radioButton6.UseVisualStyleBackColor = true;
@@ -348,9 +378,10 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(19, 26);
+            this.radioButton5.Location = new System.Drawing.Point(25, 32);
+            this.radioButton5.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(83, 16);
+            this.radioButton5.Size = new System.Drawing.Size(103, 19);
             this.radioButton5.TabIndex = 0;
             this.radioButton5.Text = "前端不夹卡";
             this.radioButton5.UseVisualStyleBackColor = true;
@@ -361,18 +392,21 @@
             this.groupBox4.Controls.Add(this.radioButton13);
             this.groupBox4.Controls.Add(this.radioButton12);
             this.groupBox4.Controls.Add(this.radioButton11);
-            this.groupBox4.Location = new System.Drawing.Point(12, 610);
+            this.groupBox4.Location = new System.Drawing.Point(16, 762);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(313, 114);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(417, 142);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "设置掉电退卡模式";
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(19, 82);
+            this.button7.Location = new System.Drawing.Point(25, 102);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.Size = new System.Drawing.Size(100, 29);
             this.button7.TabIndex = 3;
             this.button7.Text = "设置";
             this.button7.UseVisualStyleBackColor = true;
@@ -381,9 +415,10 @@
             // radioButton13
             // 
             this.radioButton13.AutoSize = true;
-            this.radioButton13.Location = new System.Drawing.Point(19, 58);
+            this.radioButton13.Location = new System.Drawing.Point(25, 72);
+            this.radioButton13.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton13.Name = "radioButton13";
-            this.radioButton13.Size = new System.Drawing.Size(71, 16);
+            this.radioButton13.Size = new System.Drawing.Size(88, 19);
             this.radioButton13.TabIndex = 2;
             this.radioButton13.Text = "后端退卡";
             this.radioButton13.UseVisualStyleBackColor = true;
@@ -392,9 +427,10 @@
             // 
             this.radioButton12.AutoSize = true;
             this.radioButton12.Checked = true;
-            this.radioButton12.Location = new System.Drawing.Point(149, 31);
+            this.radioButton12.Location = new System.Drawing.Point(199, 39);
+            this.radioButton12.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(107, 16);
+            this.radioButton12.Size = new System.Drawing.Size(133, 19);
             this.radioButton12.TabIndex = 1;
             this.radioButton12.TabStop = true;
             this.radioButton12.Text = "前端退卡不夹卡";
@@ -403,18 +439,20 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(19, 31);
+            this.radioButton11.Location = new System.Drawing.Point(25, 39);
+            this.radioButton11.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(95, 16);
+            this.radioButton11.Size = new System.Drawing.Size(118, 19);
             this.radioButton11.TabIndex = 0;
             this.radioButton11.Text = "前端退卡夹卡";
             this.radioButton11.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(231, 31);
+            this.button3.Location = new System.Drawing.Point(308, 39);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(100, 29);
             this.button3.TabIndex = 5;
             this.button3.Text = "检测卡片位置";
             this.button3.UseVisualStyleBackColor = true;
@@ -428,18 +466,21 @@
             this.groupBox5.Controls.Add(this.radioButton14);
             this.groupBox5.Controls.Add(this.textBox3);
             this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Location = new System.Drawing.Point(11, 319);
+            this.groupBox5.Location = new System.Drawing.Point(15, 399);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(313, 133);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox5.Size = new System.Drawing.Size(417, 166);
             this.groupBox5.TabIndex = 6;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "移卡操作";
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(16, 99);
+            this.button8.Location = new System.Drawing.Point(21, 124);
+            this.button8.Margin = new System.Windows.Forms.Padding(4);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.Size = new System.Drawing.Size(100, 29);
             this.button8.TabIndex = 5;
             this.button8.Text = "确定";
             this.button8.UseVisualStyleBackColor = true;
@@ -448,9 +489,10 @@
             // radioButton16
             // 
             this.radioButton16.AutoSize = true;
-            this.radioButton16.Location = new System.Drawing.Point(16, 72);
+            this.radioButton16.Location = new System.Drawing.Point(21, 90);
+            this.radioButton16.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton16.Name = "radioButton16";
-            this.radioButton16.Size = new System.Drawing.Size(83, 16);
+            this.radioButton16.Size = new System.Drawing.Size(103, 19);
             this.radioButton16.TabIndex = 4;
             this.radioButton16.Text = "非接触式卡";
             this.radioButton16.UseVisualStyleBackColor = true;
@@ -459,9 +501,10 @@
             // 
             this.radioButton15.AutoSize = true;
             this.radioButton15.Checked = true;
-            this.radioButton15.Location = new System.Drawing.Point(145, 50);
+            this.radioButton15.Location = new System.Drawing.Point(193, 62);
+            this.radioButton15.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton15.Name = "radioButton15";
-            this.radioButton15.Size = new System.Drawing.Size(71, 16);
+            this.radioButton15.Size = new System.Drawing.Size(88, 19);
             this.radioButton15.TabIndex = 3;
             this.radioButton15.TabStop = true;
             this.radioButton15.Text = "接触式卡";
@@ -470,27 +513,30 @@
             // radioButton14
             // 
             this.radioButton14.AutoSize = true;
-            this.radioButton14.Location = new System.Drawing.Point(16, 50);
+            this.radioButton14.Location = new System.Drawing.Point(21, 62);
+            this.radioButton14.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton14.Name = "radioButton14";
-            this.radioButton14.Size = new System.Drawing.Size(59, 16);
+            this.radioButton14.Size = new System.Drawing.Size(73, 19);
             this.radioButton14.TabIndex = 2;
             this.radioButton14.Text = "磁条卡";
             this.radioButton14.UseVisualStyleBackColor = true;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(86, 23);
+            this.textBox3.Location = new System.Drawing.Point(115, 29);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.Size = new System.Drawing.Size(132, 25);
             this.textBox3.TabIndex = 1;
             this.textBox3.Text = "10";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 27);
+            this.label3.Location = new System.Drawing.Point(21, 34);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(67, 15);
             this.label3.TabIndex = 0;
             this.label3.Text = "等待时间";
             // 
@@ -502,18 +548,21 @@
             this.groupBox6.Controls.Add(this.radioButton19);
             this.groupBox6.Controls.Add(this.textBox4);
             this.groupBox6.Controls.Add(this.label4);
-            this.groupBox6.Location = new System.Drawing.Point(11, 459);
+            this.groupBox6.Location = new System.Drawing.Point(15, 574);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(313, 141);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox6.Size = new System.Drawing.Size(417, 176);
             this.groupBox6.TabIndex = 7;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "弹出卡片";
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(16, 97);
+            this.button9.Location = new System.Drawing.Point(21, 121);
+            this.button9.Margin = new System.Windows.Forms.Padding(4);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.Size = new System.Drawing.Size(100, 29);
             this.button9.TabIndex = 11;
             this.button9.Text = "弹出卡片";
             this.button9.UseVisualStyleBackColor = true;
@@ -523,9 +572,10 @@
             // 
             this.radioButton17.AutoSize = true;
             this.radioButton17.Checked = true;
-            this.radioButton17.Location = new System.Drawing.Point(16, 49);
+            this.radioButton17.Location = new System.Drawing.Point(21, 61);
+            this.radioButton17.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton17.Name = "radioButton17";
-            this.radioButton17.Size = new System.Drawing.Size(95, 16);
+            this.radioButton17.Size = new System.Drawing.Size(118, 19);
             this.radioButton17.TabIndex = 10;
             this.radioButton17.TabStop = true;
             this.radioButton17.Text = "弹到前端夹卡";
@@ -534,9 +584,10 @@
             // radioButton18
             // 
             this.radioButton18.AutoSize = true;
-            this.radioButton18.Location = new System.Drawing.Point(145, 48);
+            this.radioButton18.Location = new System.Drawing.Point(193, 60);
+            this.radioButton18.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton18.Name = "radioButton18";
-            this.radioButton18.Size = new System.Drawing.Size(71, 16);
+            this.radioButton18.Size = new System.Drawing.Size(88, 19);
             this.radioButton18.TabIndex = 9;
             this.radioButton18.Text = "弹到后端";
             this.radioButton18.UseVisualStyleBackColor = true;
@@ -544,27 +595,30 @@
             // radioButton19
             // 
             this.radioButton19.AutoSize = true;
-            this.radioButton19.Location = new System.Drawing.Point(16, 75);
+            this.radioButton19.Location = new System.Drawing.Point(21, 94);
+            this.radioButton19.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton19.Name = "radioButton19";
-            this.radioButton19.Size = new System.Drawing.Size(107, 16);
+            this.radioButton19.Size = new System.Drawing.Size(133, 19);
             this.radioButton19.TabIndex = 8;
             this.radioButton19.Text = "弹到前端不夹卡";
             this.radioButton19.UseVisualStyleBackColor = true;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(86, 21);
+            this.textBox4.Location = new System.Drawing.Point(115, 26);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.Size = new System.Drawing.Size(132, 25);
             this.textBox4.TabIndex = 7;
             this.textBox4.Text = "10";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 25);
+            this.label4.Location = new System.Drawing.Point(21, 31);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(67, 15);
             this.label4.TabIndex = 6;
             this.label4.Text = "等待时间";
             // 
@@ -577,18 +631,21 @@
             this.groupBox7.Controls.Add(this.radioButton20);
             this.groupBox7.Controls.Add(this.textBox5);
             this.groupBox7.Controls.Add(this.label5);
-            this.groupBox7.Location = new System.Drawing.Point(11, 157);
+            this.groupBox7.Location = new System.Drawing.Point(15, 196);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(313, 154);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox7.Size = new System.Drawing.Size(417, 192);
             this.groupBox7.TabIndex = 8;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "插入卡片";
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(24, 116);
+            this.button10.Location = new System.Drawing.Point(32, 145);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.Size = new System.Drawing.Size(100, 29);
             this.button10.TabIndex = 14;
             this.button10.Text = "插卡";
             this.button10.UseVisualStyleBackColor = true;
@@ -597,9 +654,10 @@
             // radioButton23
             // 
             this.radioButton23.AutoSize = true;
-            this.radioButton23.Location = new System.Drawing.Point(145, 79);
+            this.radioButton23.Location = new System.Drawing.Point(193, 99);
+            this.radioButton23.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton23.Name = "radioButton23";
-            this.radioButton23.Size = new System.Drawing.Size(107, 16);
+            this.radioButton23.Size = new System.Drawing.Size(133, 19);
             this.radioButton23.TabIndex = 13;
             this.radioButton23.Text = "后端进卡带磁条";
             this.radioButton23.UseVisualStyleBackColor = true;
@@ -607,9 +665,10 @@
             // radioButton22
             // 
             this.radioButton22.AutoSize = true;
-            this.radioButton22.Location = new System.Drawing.Point(16, 79);
+            this.radioButton22.Location = new System.Drawing.Point(21, 99);
+            this.radioButton22.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton22.Name = "radioButton22";
-            this.radioButton22.Size = new System.Drawing.Size(119, 16);
+            this.radioButton22.Size = new System.Drawing.Size(148, 19);
             this.radioButton22.TabIndex = 12;
             this.radioButton22.Text = "后端进卡不带磁条";
             this.radioButton22.UseVisualStyleBackColor = true;
@@ -617,9 +676,10 @@
             // radioButton21
             // 
             this.radioButton21.AutoSize = true;
-            this.radioButton21.Location = new System.Drawing.Point(145, 57);
+            this.radioButton21.Location = new System.Drawing.Point(193, 71);
+            this.radioButton21.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton21.Name = "radioButton21";
-            this.radioButton21.Size = new System.Drawing.Size(107, 16);
+            this.radioButton21.Size = new System.Drawing.Size(133, 19);
             this.radioButton21.TabIndex = 11;
             this.radioButton21.Text = "前端进卡带磁条";
             this.radioButton21.UseVisualStyleBackColor = true;
@@ -628,9 +688,10 @@
             // 
             this.radioButton20.AutoSize = true;
             this.radioButton20.Checked = true;
-            this.radioButton20.Location = new System.Drawing.Point(16, 57);
+            this.radioButton20.Location = new System.Drawing.Point(21, 71);
+            this.radioButton20.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton20.Name = "radioButton20";
-            this.radioButton20.Size = new System.Drawing.Size(119, 16);
+            this.radioButton20.Size = new System.Drawing.Size(148, 19);
             this.radioButton20.TabIndex = 10;
             this.radioButton20.TabStop = true;
             this.radioButton20.Text = "前端进卡不带磁条";
@@ -638,18 +699,20 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(92, 25);
+            this.textBox5.Location = new System.Drawing.Point(123, 31);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.Size = new System.Drawing.Size(132, 25);
             this.textBox5.TabIndex = 9;
             this.textBox5.Text = "10";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 29);
+            this.label5.Location = new System.Drawing.Point(29, 36);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(67, 15);
             this.label5.TabIndex = 8;
             this.label5.Text = "等待时间";
             // 
@@ -662,18 +725,21 @@
             this.groupBox8.Controls.Add(this.label8);
             this.groupBox8.Controls.Add(this.label7);
             this.groupBox8.Controls.Add(this.label6);
-            this.groupBox8.Location = new System.Drawing.Point(347, 50);
+            this.groupBox8.Location = new System.Drawing.Point(463, 62);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(313, 211);
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox8.Size = new System.Drawing.Size(417, 264);
             this.groupBox8.TabIndex = 9;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "磁条卡操作";
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(21, 177);
+            this.button11.Location = new System.Drawing.Point(28, 221);
+            this.button11.Margin = new System.Windows.Forms.Padding(4);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.Size = new System.Drawing.Size(100, 29);
             this.button11.TabIndex = 6;
             this.button11.Text = "读取";
             this.button11.UseVisualStyleBackColor = true;
@@ -681,57 +747,64 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(21, 145);
+            this.textBox8.Location = new System.Drawing.Point(28, 181);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(275, 21);
+            this.textBox8.Size = new System.Drawing.Size(365, 25);
             this.textBox8.TabIndex = 5;
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(21, 91);
+            this.textBox7.Location = new System.Drawing.Point(28, 114);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(275, 21);
+            this.textBox7.Size = new System.Drawing.Size(365, 25);
             this.textBox7.TabIndex = 4;
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(21, 42);
+            this.textBox6.Location = new System.Drawing.Point(28, 52);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(275, 21);
+            this.textBox6.Size = new System.Drawing.Size(365, 25);
             this.textBox6.TabIndex = 3;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 125);
+            this.label8.Location = new System.Drawing.Point(21, 156);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.Size = new System.Drawing.Size(67, 15);
             this.label8.TabIndex = 2;
             this.label8.Text = "磁道三：";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 73);
+            this.label7.Location = new System.Drawing.Point(21, 91);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.Size = new System.Drawing.Size(67, 15);
             this.label7.TabIndex = 1;
             this.label7.Text = "磁道二：";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 23);
+            this.label6.Location = new System.Drawing.Point(21, 29);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 0;
             this.label6.Text = "磁道一：";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(21, 29);
+            this.button4.Location = new System.Drawing.Point(28, 36);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(100, 29);
             this.button4.TabIndex = 10;
             this.button4.Text = "设备复位";
             this.button4.UseVisualStyleBackColor = true;
@@ -739,9 +812,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(124, 31);
+            this.button5.Location = new System.Drawing.Point(165, 39);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(100, 29);
             this.button5.TabIndex = 11;
             this.button5.Text = "自动测卡型";
             this.button5.UseVisualStyleBackColor = true;
@@ -753,18 +827,21 @@
             this.groupBox9.Controls.Add(this.radioButton26);
             this.groupBox9.Controls.Add(this.radioButton25);
             this.groupBox9.Controls.Add(this.radioButton24);
-            this.groupBox9.Location = new System.Drawing.Point(347, 598);
+            this.groupBox9.Location = new System.Drawing.Point(463, 748);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(313, 124);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox9.Size = new System.Drawing.Size(417, 155);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "设置后端进卡模式";
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(19, 86);
+            this.button12.Location = new System.Drawing.Point(25, 108);
+            this.button12.Margin = new System.Windows.Forms.Padding(4);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.Size = new System.Drawing.Size(100, 29);
             this.button12.TabIndex = 3;
             this.button12.Text = "设置";
             this.button12.UseVisualStyleBackColor = true;
@@ -773,9 +850,10 @@
             // radioButton26
             // 
             this.radioButton26.AutoSize = true;
-            this.radioButton26.Location = new System.Drawing.Point(19, 54);
+            this.radioButton26.Location = new System.Drawing.Point(25, 68);
+            this.radioButton26.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton26.Name = "radioButton26";
-            this.radioButton26.Size = new System.Drawing.Size(143, 16);
+            this.radioButton26.Size = new System.Drawing.Size(178, 19);
             this.radioButton26.TabIndex = 2;
             this.radioButton26.Text = "后端非磁信号方式进卡";
             this.radioButton26.UseVisualStyleBackColor = true;
@@ -783,9 +861,10 @@
             // radioButton25
             // 
             this.radioButton25.AutoSize = true;
-            this.radioButton25.Location = new System.Drawing.Point(149, 25);
+            this.radioButton25.Location = new System.Drawing.Point(199, 31);
+            this.radioButton25.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton25.Name = "radioButton25";
-            this.radioButton25.Size = new System.Drawing.Size(119, 16);
+            this.radioButton25.Size = new System.Drawing.Size(148, 19);
             this.radioButton25.TabIndex = 1;
             this.radioButton25.Text = "后端磁卡方式进卡";
             this.radioButton25.UseVisualStyleBackColor = true;
@@ -794,9 +873,10 @@
             // 
             this.radioButton24.AutoSize = true;
             this.radioButton24.Checked = true;
-            this.radioButton24.Location = new System.Drawing.Point(19, 23);
+            this.radioButton24.Location = new System.Drawing.Point(25, 29);
+            this.radioButton24.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton24.Name = "radioButton24";
-            this.radioButton24.Size = new System.Drawing.Size(95, 16);
+            this.radioButton24.Size = new System.Drawing.Size(118, 19);
             this.radioButton24.TabIndex = 0;
             this.radioButton24.TabStop = true;
             this.radioButton24.Text = "后端禁止进卡";
@@ -807,27 +887,31 @@
             this.groupBox10.Controls.Add(this.textBox9);
             this.groupBox10.Controls.Add(this.button14);
             this.groupBox10.Controls.Add(this.button13);
-            this.groupBox10.Location = new System.Drawing.Point(347, 275);
+            this.groupBox10.Location = new System.Drawing.Point(463, 344);
+            this.groupBox10.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(313, 187);
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox10.Size = new System.Drawing.Size(417, 234);
             this.groupBox10.TabIndex = 13;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "获取传感器状态";
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(23, 56);
+            this.textBox9.Location = new System.Drawing.Point(31, 70);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(4);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
             this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox9.Size = new System.Drawing.Size(273, 119);
+            this.textBox9.Size = new System.Drawing.Size(363, 148);
             this.textBox9.TabIndex = 2;
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(148, 24);
+            this.button14.Location = new System.Drawing.Point(197, 30);
+            this.button14.Margin = new System.Windows.Forms.Padding(4);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(75, 23);
+            this.button14.Size = new System.Drawing.Size(100, 29);
             this.button14.TabIndex = 1;
             this.button14.Text = "清楚显示";
             this.button14.UseVisualStyleBackColor = true;
@@ -835,9 +919,10 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(21, 24);
+            this.button13.Location = new System.Drawing.Point(28, 30);
+            this.button13.Margin = new System.Windows.Forms.Padding(4);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.Size = new System.Drawing.Size(100, 29);
             this.button13.TabIndex = 0;
             this.button13.Text = "获取传感器状态";
             this.button13.UseVisualStyleBackColor = true;
@@ -845,9 +930,10 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(682, 201);
+            this.button19.Location = new System.Drawing.Point(909, 251);
+            this.button19.Margin = new System.Windows.Forms.Padding(4);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(312, 68);
+            this.button19.Size = new System.Drawing.Size(416, 85);
             this.button19.TabIndex = 17;
             this.button19.Text = "getCardNO";
             this.button19.UseVisualStyleBackColor = true;
@@ -855,19 +941,21 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(682, 313);
+            this.textBox10.Location = new System.Drawing.Point(909, 391);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(4);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
             this.textBox10.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox10.Size = new System.Drawing.Size(312, 149);
+            this.textBox10.Size = new System.Drawing.Size(415, 185);
             this.textBox10.TabIndex = 18;
             this.textBox10.Text = resources.GetString("textBox10.Text");
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(685, 284);
+            this.button20.Location = new System.Drawing.Point(913, 355);
+            this.button20.Margin = new System.Windows.Forms.Padding(4);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(75, 23);
+            this.button20.Size = new System.Drawing.Size(100, 29);
             this.button20.TabIndex = 19;
             this.button20.Text = "读医保卡";
             this.button20.UseVisualStyleBackColor = true;
@@ -875,13 +963,17 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.服务配置ToolStripMenuItem,
             this.设置ToolStripMenuItem,
+            this.打开所在ToolStripMenuItem,
+            this.日志ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1006, 25);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1341, 28);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -892,27 +984,27 @@
             this.开启服务ToolStripMenuItem,
             this.关闭服务ToolStripMenuItem});
             this.服务配置ToolStripMenuItem.Name = "服务配置ToolStripMenuItem";
-            this.服务配置ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.服务配置ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.服务配置ToolStripMenuItem.Text = "服务配置";
             // 
             // 端口配置ToolStripMenuItem
             // 
             this.端口配置ToolStripMenuItem.Name = "端口配置ToolStripMenuItem";
-            this.端口配置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.端口配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.端口配置ToolStripMenuItem.Text = "端口配置";
             this.端口配置ToolStripMenuItem.Click += new System.EventHandler(this.端口配置ToolStripMenuItem_Click);
             // 
             // 开启服务ToolStripMenuItem
             // 
             this.开启服务ToolStripMenuItem.Name = "开启服务ToolStripMenuItem";
-            this.开启服务ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.开启服务ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.开启服务ToolStripMenuItem.Text = "开启服务";
             this.开启服务ToolStripMenuItem.Click += new System.EventHandler(this.开启服务ToolStripMenuItem_Click);
             // 
             // 关闭服务ToolStripMenuItem
             // 
             this.关闭服务ToolStripMenuItem.Name = "关闭服务ToolStripMenuItem";
-            this.关闭服务ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.关闭服务ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.关闭服务ToolStripMenuItem.Text = "关闭服务";
             this.关闭服务ToolStripMenuItem.Click += new System.EventHandler(this.关闭服务ToolStripMenuItem_Click);
             // 
@@ -921,30 +1013,73 @@
             this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.开机启动ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.设置ToolStripMenuItem.Text = "设置";
             // 
             // 开机启动ToolStripMenuItem
             // 
             this.开机启动ToolStripMenuItem.Name = "开机启动ToolStripMenuItem";
-            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.开机启动ToolStripMenuItem.Text = "开机启动";
             this.开机启动ToolStripMenuItem.Click += new System.EventHandler(this.开机启动ToolStripMenuItem_Click);
             // 
+            // 打开所在ToolStripMenuItem
+            // 
+            this.打开所在ToolStripMenuItem.Name = "打开所在ToolStripMenuItem";
+            this.打开所在ToolStripMenuItem.Size = new System.Drawing.Size(113, 24);
+            this.打开所在ToolStripMenuItem.Text = "打开程序目录";
+            this.打开所在ToolStripMenuItem.Click += new System.EventHandler(this.打开所在ToolStripMenuItem_Click);
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.接口地址ToolStripMenuItem});
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // 接口地址ToolStripMenuItem
+            // 
+            this.接口地址ToolStripMenuItem.Name = "接口地址ToolStripMenuItem";
+            this.接口地址ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.接口地址ToolStripMenuItem.Text = "接口地址";
+            this.接口地址ToolStripMenuItem.Click += new System.EventHandler(this.接口地址ToolStripMenuItem_Click);
+            // 
+            // 日志ToolStripMenuItem
+            // 
+            this.日志ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打开日志目录ToolStripMenuItem,
+            this.错误日志ToolStripMenuItem,
+            this.errorlogToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.neuqpayServicelogToolStripMenuItem});
+            this.日志ToolStripMenuItem.Name = "日志ToolStripMenuItem";
+            this.日志ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.日志ToolStripMenuItem.Text = "打开日志";
+            // 
+            // neuqpayServicelogToolStripMenuItem
+            // 
+            this.neuqpayServicelogToolStripMenuItem.Name = "neuqpayServicelogToolStripMenuItem";
+            this.neuqpayServicelogToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.neuqpayServicelogToolStripMenuItem.Text = "neuqpayService.log";
+            this.neuqpayServicelogToolStripMenuItem.Click += new System.EventHandler(this.neuqpayServicelogToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 727);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 910);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1006, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1341, 26);
             this.statusStrip1.TabIndex = 23;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(32, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 20);
             this.toolStripStatusLabel1.Text = "状态";
             // 
             // notifyIcon1
@@ -957,55 +1092,69 @@
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.显示ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(109, 52);
             // 
             // 显示ToolStripMenuItem
             // 
             this.显示ToolStripMenuItem.Name = "显示ToolStripMenuItem";
-            this.显示ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.显示ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
             this.显示ToolStripMenuItem.Text = "显示";
             this.显示ToolStripMenuItem.Click += new System.EventHandler(this.显示ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(108, 24);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
             // 
             // textBoxLog
             // 
-            this.textBoxLog.Location = new System.Drawing.Point(666, 468);
+            this.textBoxLog.Location = new System.Drawing.Point(888, 585);
+            this.textBoxLog.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxLog.Size = new System.Drawing.Size(328, 256);
+            this.textBoxLog.Size = new System.Drawing.Size(436, 319);
             this.textBoxLog.TabIndex = 25;
             // 
-            // 帮助ToolStripMenuItem
+            // 打开日志目录ToolStripMenuItem
             // 
-            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.接口地址ToolStripMenuItem});
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.帮助ToolStripMenuItem.Text = "帮助";
+            this.打开日志目录ToolStripMenuItem.Name = "打开日志目录ToolStripMenuItem";
+            this.打开日志目录ToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.打开日志目录ToolStripMenuItem.Text = "打开日志目录";
+            this.打开日志目录ToolStripMenuItem.Click += new System.EventHandler(this.打开日志目录ToolStripMenuItem_Click);
             // 
-            // 接口地址ToolStripMenuItem
+            // 错误日志ToolStripMenuItem
             // 
-            this.接口地址ToolStripMenuItem.Name = "接口地址ToolStripMenuItem";
-            this.接口地址ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.接口地址ToolStripMenuItem.Text = "接口地址";
+            this.错误日志ToolStripMenuItem.Name = "错误日志ToolStripMenuItem";
+            this.错误日志ToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.错误日志ToolStripMenuItem.Text = "Debug.log";
+            this.错误日志ToolStripMenuItem.Click += new System.EventHandler(this.错误日志ToolStripMenuItem_Click);
+            // 
+            // errorlogToolStripMenuItem
+            // 
+            this.errorlogToolStripMenuItem.Name = "errorlogToolStripMenuItem";
+            this.errorlogToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.errorlogToolStripMenuItem.Text = "Error.log";
+            this.errorlogToolStripMenuItem.Click += new System.EventHandler(this.errorlogToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(233, 6);
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 749);
+            this.ClientSize = new System.Drawing.Size(1341, 936);
             this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button20);
@@ -1028,6 +1177,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1153,6 +1303,13 @@
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 接口地址ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开所在ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 日志ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neuqpayServicelogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开日志目录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 错误日志ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem errorlogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
 

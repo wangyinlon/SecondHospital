@@ -11,6 +11,7 @@ using AutoUpdaterDotNET;
 using CardService.Config;
 using CardService.Model;
 using CardService.Utils;
+using CardService.Views;
 using HZH_Controls;
 using HZH_Controls.Forms;
 using Nancy.Hosting.Self;
@@ -426,6 +427,7 @@ namespace CardService
 
         private void button20_Click(object sender, EventArgs e)
         {
+            throw new Exception();
             StringBuilder cardno = new StringBuilder(20480);
             StringBuilder ierrinfo = new StringBuilder(20480);
             var ret = SSCard.submitReqToCommService(textBox10.Text, cardno);
@@ -539,6 +541,37 @@ namespace CardService
                 //图标显示在托盘区
                 notifyIcon1.Visible = true;
             }
+        }
+
+        private void 接口地址ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmApi frm = new FrmApi();
+            frm.ShowDialog();
+        }
+
+        private void 打开所在ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath);
+        }
+
+        private void 打开日志目录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\Logs");
+        }
+
+        private void 错误日志ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\Logs\\" + DateTime.Now.ToString("yyyy-MM-dd") + "\\Debug.log");
+        }
+
+        private void errorlogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\Logs\\" + DateTime.Now.ToString("yyyy-MM-dd") + "\\Error.log");
+        }
+
+        private void neuqpayServicelogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\neuqpayService.log");
         }
     }
 }
