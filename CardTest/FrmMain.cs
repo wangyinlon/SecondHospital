@@ -216,29 +216,6 @@ namespace CardService
             MessageBox.Show(res.ToString());
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            string s = "0x00";
-            if (radioButton20.Checked)
-            {
-                s = "0x00";
-            }
-            else if (radioButton21.Checked)
-            {
-                s = "0x01";
-            }
-            else if (radioButton22.Checked)
-            {
-                s = "0x03";
-            }
-            else if (radioButton23.Checked)
-            {
-                s = "0x04";
-            }
-            byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceCardInject(Configs.Handle, Convert.ToByte(textBox4.Text, 16), b);
-            MessageBox.Show(res.ToString());
-        }
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -572,6 +549,54 @@ namespace CardService
         private void neuqpayServicelogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(Application.StartupPath + "\\neuqpayService.log");
+        }
+
+        private void ucBtnExt1_BtnClick(object sender, EventArgs e)
+        {
+            string s = "0x00";
+            if (radioButton20.Checked)
+            {
+                s = "0x00";
+            }
+            else if (radioButton21.Checked)
+            {
+                s = "0x01";
+            }
+            else if (radioButton22.Checked)
+            {
+                s = "0x03";
+            }
+            else if (radioButton23.Checked)
+            {
+                s = "0x04";
+            }
+            byte b = System.Convert.ToByte(s, 16);
+            var res = dcrf.dc_SelfServiceDeviceCardInject(Configs.Handle, Convert.ToByte(textBox4.Text, 16), b);
+            MessageBox.Show(res.ToString());
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string s = "0x00";
+            if (radioButton20.Checked)
+            {
+                s = "0x00";
+            }
+            else if (radioButton21.Checked)
+            {
+                s = "0x01";
+            }
+            else if (radioButton22.Checked)
+            {
+                s = "0x03";
+            }
+            else if (radioButton23.Checked)
+            {
+                s = "0x04";
+            }
+            byte b = System.Convert.ToByte(s, 16);
+            var res = dcrf.dc_SelfServiceDeviceCardInject(Configs.Handle, Convert.ToByte(textBox4.Text, 16), b);
+            Configs.LogDebug(res.ToString());
         }
     }
 }

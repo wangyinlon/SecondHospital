@@ -180,6 +180,11 @@ namespace CardService.Modules
             ResParameter res = new ResParameter { code = ResponseCode.fail, info = info, data = new object { } };
             return Response.AsText(res.ToJson()).WithContentType("application/json");
         }
+        public Response Fail(string info, object data)
+        {
+            ResParameter res = new ResParameter { code = ResponseCode.fail, info = info, data = data };
+            return Response.AsText(res.ToJson()).WithContentType("application/json");
+        }
         public Response FailNoLogin(string info)
         {
             ResParameter res = new ResParameter { code = ResponseCode.nologin, info = info, data = new object { } };

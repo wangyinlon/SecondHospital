@@ -72,6 +72,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.ucBtnExt1 = new HZH_Controls.Controls.UCBtnExt();
             this.button10 = new System.Windows.Forms.Button();
             this.radioButton23 = new System.Windows.Forms.RadioButton();
             this.radioButton22 = new System.Windows.Forms.RadioButton();
@@ -109,10 +110,14 @@
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开所在ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开日志目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.错误日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.neuqpayServicelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.接口地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuqpayServicelogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -120,10 +125,6 @@
             this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxLog = new System.Windows.Forms.TextBox();
-            this.打开日志目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.错误日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.errorlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -624,6 +625,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.ucBtnExt1);
             this.groupBox7.Controls.Add(this.button10);
             this.groupBox7.Controls.Add(this.radioButton23);
             this.groupBox7.Controls.Add(this.radioButton22);
@@ -639,6 +641,33 @@
             this.groupBox7.TabIndex = 8;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "插入卡片";
+            // 
+            // ucBtnExt1
+            // 
+            this.ucBtnExt1.BackColor = System.Drawing.Color.White;
+            this.ucBtnExt1.BtnBackColor = System.Drawing.Color.White;
+            this.ucBtnExt1.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ucBtnExt1.BtnForeColor = System.Drawing.Color.White;
+            this.ucBtnExt1.BtnText = "插卡";
+            this.ucBtnExt1.ConerRadius = 5;
+            this.ucBtnExt1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ucBtnExt1.EnabledMouseEffect = true;
+            this.ucBtnExt1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.ucBtnExt1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.ucBtnExt1.IsRadius = true;
+            this.ucBtnExt1.IsShowRect = true;
+            this.ucBtnExt1.IsShowTips = false;
+            this.ucBtnExt1.Location = new System.Drawing.Point(260, 145);
+            this.ucBtnExt1.Margin = new System.Windows.Forms.Padding(0);
+            this.ucBtnExt1.Name = "ucBtnExt1";
+            this.ucBtnExt1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
+            this.ucBtnExt1.RectWidth = 1;
+            this.ucBtnExt1.Size = new System.Drawing.Size(115, 36);
+            this.ucBtnExt1.TabIndex = 26;
+            this.ucBtnExt1.TabStop = false;
+            this.ucBtnExt1.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
+            this.ucBtnExt1.TipsText = "";
+            this.ucBtnExt1.BtnClick += new System.EventHandler(this.ucBtnExt1_BtnClick);
             // 
             // button10
             // 
@@ -1030,6 +1059,51 @@
             this.打开所在ToolStripMenuItem.Text = "打开程序目录";
             this.打开所在ToolStripMenuItem.Click += new System.EventHandler(this.打开所在ToolStripMenuItem_Click);
             // 
+            // 日志ToolStripMenuItem
+            // 
+            this.日志ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打开日志目录ToolStripMenuItem,
+            this.错误日志ToolStripMenuItem,
+            this.errorlogToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.neuqpayServicelogToolStripMenuItem});
+            this.日志ToolStripMenuItem.Name = "日志ToolStripMenuItem";
+            this.日志ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.日志ToolStripMenuItem.Text = "打开日志";
+            // 
+            // 打开日志目录ToolStripMenuItem
+            // 
+            this.打开日志目录ToolStripMenuItem.Name = "打开日志目录ToolStripMenuItem";
+            this.打开日志目录ToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.打开日志目录ToolStripMenuItem.Text = "打开日志目录";
+            this.打开日志目录ToolStripMenuItem.Click += new System.EventHandler(this.打开日志目录ToolStripMenuItem_Click);
+            // 
+            // 错误日志ToolStripMenuItem
+            // 
+            this.错误日志ToolStripMenuItem.Name = "错误日志ToolStripMenuItem";
+            this.错误日志ToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.错误日志ToolStripMenuItem.Text = "Debug.log";
+            this.错误日志ToolStripMenuItem.Click += new System.EventHandler(this.错误日志ToolStripMenuItem_Click);
+            // 
+            // errorlogToolStripMenuItem
+            // 
+            this.errorlogToolStripMenuItem.Name = "errorlogToolStripMenuItem";
+            this.errorlogToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.errorlogToolStripMenuItem.Text = "Error.log";
+            this.errorlogToolStripMenuItem.Click += new System.EventHandler(this.errorlogToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(233, 6);
+            // 
+            // neuqpayServicelogToolStripMenuItem
+            // 
+            this.neuqpayServicelogToolStripMenuItem.Name = "neuqpayServicelogToolStripMenuItem";
+            this.neuqpayServicelogToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
+            this.neuqpayServicelogToolStripMenuItem.Text = "neuqpayService.log";
+            this.neuqpayServicelogToolStripMenuItem.Click += new System.EventHandler(this.neuqpayServicelogToolStripMenuItem_Click);
+            // 
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1044,25 +1118,6 @@
             this.接口地址ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.接口地址ToolStripMenuItem.Text = "接口地址";
             this.接口地址ToolStripMenuItem.Click += new System.EventHandler(this.接口地址ToolStripMenuItem_Click);
-            // 
-            // 日志ToolStripMenuItem
-            // 
-            this.日志ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.打开日志目录ToolStripMenuItem,
-            this.错误日志ToolStripMenuItem,
-            this.errorlogToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.neuqpayServicelogToolStripMenuItem});
-            this.日志ToolStripMenuItem.Name = "日志ToolStripMenuItem";
-            this.日志ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
-            this.日志ToolStripMenuItem.Text = "打开日志";
-            // 
-            // neuqpayServicelogToolStripMenuItem
-            // 
-            this.neuqpayServicelogToolStripMenuItem.Name = "neuqpayServicelogToolStripMenuItem";
-            this.neuqpayServicelogToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
-            this.neuqpayServicelogToolStripMenuItem.Text = "neuqpayService.log";
-            this.neuqpayServicelogToolStripMenuItem.Click += new System.EventHandler(this.neuqpayServicelogToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -1123,32 +1178,6 @@
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxLog.Size = new System.Drawing.Size(436, 319);
             this.textBoxLog.TabIndex = 25;
-            // 
-            // 打开日志目录ToolStripMenuItem
-            // 
-            this.打开日志目录ToolStripMenuItem.Name = "打开日志目录ToolStripMenuItem";
-            this.打开日志目录ToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
-            this.打开日志目录ToolStripMenuItem.Text = "打开日志目录";
-            this.打开日志目录ToolStripMenuItem.Click += new System.EventHandler(this.打开日志目录ToolStripMenuItem_Click);
-            // 
-            // 错误日志ToolStripMenuItem
-            // 
-            this.错误日志ToolStripMenuItem.Name = "错误日志ToolStripMenuItem";
-            this.错误日志ToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
-            this.错误日志ToolStripMenuItem.Text = "Debug.log";
-            this.错误日志ToolStripMenuItem.Click += new System.EventHandler(this.错误日志ToolStripMenuItem_Click);
-            // 
-            // errorlogToolStripMenuItem
-            // 
-            this.errorlogToolStripMenuItem.Name = "errorlogToolStripMenuItem";
-            this.errorlogToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
-            this.errorlogToolStripMenuItem.Text = "Error.log";
-            this.errorlogToolStripMenuItem.Click += new System.EventHandler(this.errorlogToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(233, 6);
             // 
             // FrmMain
             // 
@@ -1310,6 +1339,7 @@
         private System.Windows.Forms.ToolStripMenuItem 错误日志ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem errorlogToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private HZH_Controls.Controls.UCBtnExt ucBtnExt1;
     }
 }
 

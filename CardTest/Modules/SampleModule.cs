@@ -17,6 +17,7 @@ using CardService.Utils;
 using MT.Library.Parameter;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace CardService.Modules
@@ -40,7 +41,7 @@ namespace CardService.Modules
             Get["/call1"] = Call1;
 
             //读卡集成
-            Get["/call"] = Call;
+            Get["apc/call"] = Call;
             //关闭端口
             Get["/exit"] = Dc_Exit;
             //打开端口
@@ -130,7 +131,7 @@ namespace CardService.Modules
                 Log4.Error(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "[程序异常]" + e.ToString());
                 return Fail(e.ToString());
             }
-          
+
 
         }
         private Response dc_SelfServiceDeviceCardEject(dynamic _)
@@ -160,15 +161,9 @@ namespace CardService.Modules
                 var baud = ConfigurationManager.AppSettings["Baud"];
 
                 //第1步,打开端口
-                Log4.Debug("第1步,打开端口--------");
-                AppReportManager.Instance.Send(new LogEntity() { Log = "第1步,打开端口--------" });
+                LogDebug("第1步,打开端口--------");
+
                 IntPtr handle = dcrf.dc_init(Convert.ToInt32(port), Convert.ToInt32(baud));
-                //if (handle == IntPtr.Zero)
-                //{
-                //    Log4.Debug("第1步,打开端口:句柄为0");
-                //    AppReportManager.Instance.Send(new LogEntity() { Log = "第1步,打开端口:句柄为0" });
-                //    return Fail($"第1步,打开端口:句柄为0");
-                //}
 
                 if ((int)handle > 0)
                 {
@@ -180,44 +175,65 @@ namespace CardService.Modules
                     handle = (IntPtr)AppCfg.Instance.Handle;
                 }
 
-                //else
-                //{
-                //    Log4.Debug($"第1步,打开端口:句柄不为0[{handle}]");
-                //    AppCfg.Instance.Handle = handle;
-                //    AppCfg.Instance.Save();
-                //}
 
                 //第2步,检测是否有卡
-                Log4.Debug("第2步,检测是否有卡--------");
-                AppReportManager.Instance.Send(new LogEntity() { Log = "第2步,检测是否有卡--------" });
+                LogDebug("第2步,检测是否有卡--------");
                 byte b = new byte();
                 var res2 = dcrf.dc_SelfServiceDeviceCardStatus(handle, ref b);
                 if (res2 != 0)
                 {
+                    LogDebug($"检测是否有卡,失败!res2:{res2}");
                     dcrf.dc_exit(handle);
-                    return Fail($"第2步,检测是否有卡:res2{res2},b{Convert.ToInt32(b)}");
+                    return Fail($"检测是否有卡:返回失败!  请重试.");
                 }
-
-                if (Convert.ToInt32(b) != 0)
+                int temp = Convert.ToInt32(b);
+                if (temp != 0)
                 {
+                    LogDebug($"检测是否有卡,有卡!返回值:{res2},位置:{temp}");
                     //弹卡
                     dcrf.dc_SelfServiceDeviceCardEject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
                     dcrf.dc_exit(handle);
-                    return Fail($"第2步,检测是否有卡:res2{res2},b{Convert.ToInt32(b)}");
+                    if (temp == 1)
+                    {
+                        return Fail($"检测是否有卡:无卡，卡在前门口!  请灯熄灭后再插卡!");
+
+                    }
+                    else if (temp == 10)
+                    {
+                        return Fail($"检测是否有卡:有卡!");
+                    }
+                    else if (temp == 11)
+                    {
+                        return Fail($"检测是否有卡:有卡!");
+                    }
+                    else if (temp == 12)
+                    {
+                        return Fail($"检测是否有卡:有卡!");
+                    }
+                    else if (temp == 14)
+                    {
+                        return Fail($"检测是否有卡:有卡!");
+                    }
+                    else
+                    {
+                        return Fail($"检测是否有卡:异常,请重试!");
+                    }
+
                 }
 
                 //第3步,插卡
-                AppReportManager.Instance.Send(new LogEntity() { Log = "第3步,插卡" });
-                Log4.Debug("第3步,插卡--------");
+                LogDebug("第3步,插卡--------");
                 var res3 = dcrf.dc_SelfServiceDeviceCardInject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
                 if (res3 != 0)
                 {
                     dcrf.dc_exit(handle);
-                    return Fail($"第3步,插卡res3{res3}");
+                    LogDebug($"等待进入卡片,失败!res3:{res3}");
+                    return Fail($"等待进入卡片,失败!");
                 }
+
+
                 //第4步,检测卡类型
-                Log4.Debug("第4步,检测卡类型--------");
-                AppReportManager.Instance.Send(new LogEntity() { Log = "第4步,检测卡类型--------" });
+                LogDebug("第4步,检测卡类型--------");
                 var res4 = dcrf.dc_SelfServiceDeviceCheckCardType(handle);
                 string cardInfo = string.Empty;
                 int cardType = 0;
@@ -225,8 +241,8 @@ namespace CardService.Modules
                 {
                     cardType = 49;
                     //第5步,读信息
-                    Log4.Debug("第5步,读医保卡信息--------");
-                    AppReportManager.Instance.Send(new LogEntity() { Log = "第5步,读医保卡信息--------" });
+                    LogDebug("第5步,读医保卡信息--------");
+
                     dcrf.dc_exit(handle);
                     StringBuilder responseXml = new StringBuilder(20480);
                     Configs.INIFileHelper.IniWriteValue("READER", "READERTYPE", "1");
@@ -259,8 +275,8 @@ namespace CardService.Modules
                 {
                     cardType = 0;
                     //第5步,读信息
-                    Log4.Debug("第5步,读院内卡信息--------");
-                    AppReportManager.Instance.Send(new LogEntity() { Log = "第5步,读院内卡信息--------" });
+                    LogDebug("第5步,读院内卡信息--------");
+
                     byte[] data1 = new byte[1024];
                     byte[] data2 = new byte[1024];
                     byte[] data3 = new byte[1024];
@@ -273,35 +289,52 @@ namespace CardService.Modules
                                // Encoding.Default.GetString(data2).Replace("\u0000", "") + "|" +
                                Encoding.Default.GetString(data2).Replace("\u0000", "");
 
-                    Log4.Debug("len1=>" + len1.ToString() + "," +
+                    LogDebug("len1=>" + len1.ToString() + "," +
                                "len2=>" + len2.ToString() + "," +
                                "len3=>" + len3.ToString());
-                    AppReportManager.Instance.Send(new LogEntity()
+                    if (!Regex.IsMatch(cardInfo, @"^\d{8}$"))
                     {
-                        Log = "len1=>" + len1.ToString() + "," + "len2=>" + len2.ToString() + "," +
-                                                                           "len3=>" + len3.ToString()
-                    });
+                        cardType = -1;
+                        //弹卡
+                        dcrf.dc_SelfServiceDeviceCardEject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
+                        dcrf.dc_exit(handle);
+                        LogDebug($"卡号格式不正确,卡类型错误,仅支持  院内卡/医保卡.cardType:{cardType}");
+
+                        return Fail($"卡号格式不正确,卡类型错误,仅支持  院内卡/医保卡.");
+                    }
+
                 }
                 else
                 {
+                    LogDebug("第5步,读卡,类型异常--------");
                     cardType = -1;
                     //弹卡
                     dcrf.dc_SelfServiceDeviceCardEject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
                     dcrf.dc_exit(handle);
-                    return Fail($"第4步,检测卡类型res4{res4}");
+                    LogDebug($"卡类型错误,仅支持  院内卡/医保卡.cardType{cardType}");
+                    return Fail($"卡类型错误,仅支持  院内卡/医保卡");
                 }
 
-                //第6步,弹卡
 
-                Log4.Debug("第6步,弹卡--------");
-                AppReportManager.Instance.Send(new LogEntity() { Log = "第6步,弹卡--------" });
+                if (string.IsNullOrEmpty(cardInfo))
+                {
+                    dcrf.dc_SelfServiceDeviceCardEject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
+                    dcrf.dc_exit(handle);
+                    LogDebug($"第6步弹卡前检验卡号是否为空,cardType{cardType},卡号为空");
+
+                    return Fail($"读取卡号为空,请检测卡片放入的方式是否正确!");
+                }
+                
+                //第6步,弹卡
+                LogDebug("第6步,弹卡--------");
                 var res6 = dcrf.dc_SelfServiceDeviceCardEject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
 
+
                 //第7步,关闭端口
-                Log4.Debug("第7步,关闭端口--------");
-                AppReportManager.Instance.Send(new LogEntity() { Log = "第7步,关闭端口--------" });
+                LogDebug("第7步,关闭端口--------");
                 var res7 = dcrf.dc_exit(handle);
-                //$"第7步,关闭端口res5{res5},res6{res6},res7{res7},responseXml{responseXml}"
+
+
                 sw.Stop();
                 return Success(new
                 {
@@ -313,11 +346,16 @@ namespace CardService.Modules
             }
             catch (Exception e)
             {
-                Log4.Error(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "[程序异常]" + e.ToString());
-                return Fail(e.ToString());
+                LogDebug("[程序异常]" + e.ToString());
+                return Fail("异常,请稍后重试或联系管理员!");
             }
 
         }
 
+        private static void LogDebug(string log)
+        {
+            Log4.Debug(log);
+            AppReportManager.Instance.Send(new LogEntity() { Log = log });
+        }
     }
 }
