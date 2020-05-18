@@ -52,7 +52,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\DotNet\DotNet_WorkSpace\YinLong.Framework\YinLong.Utils.Core\YinLong.Utils.Core.csproj">
+    <ProjectReference Include="..\..\..\..\..\DotNet\DotNet_WorkSpace\YinLong.Framework\YinLong.Utils.Core\YinLong.Utils.Core.csproj">
       <Project>{5f0bdbeb-bae2-45f9-8ff1-ca0898e50ddd}</Project>
       <Name>YinLong.Utils.Core</Name>
     </ProjectReference>
