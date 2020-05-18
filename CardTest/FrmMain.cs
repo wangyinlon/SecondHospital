@@ -404,7 +404,7 @@ namespace CardService
 
         private void button20_Click(object sender, EventArgs e)
         {
-            throw new Exception();
+           
             StringBuilder cardno = new StringBuilder(20480);
             StringBuilder ierrinfo = new StringBuilder(20480);
             var ret = SSCard.submitReqToCommService(textBox10.Text, cardno);
