@@ -66,7 +66,7 @@ namespace CardService
             if (AppCfg.Instance.SelfStart)
             {
                 开机启动ToolStripMenuItem.Checked = true;
-                this.WindowState = FormWindowState.Minimized;
+                //this.WindowState = FormWindowState.Minimized;
                 开启服务ToolStripMenuItem.PerformClick();
             }
             else
@@ -412,25 +412,7 @@ namespace CardService
             MessageBox.Show(cardno.ToString());
         }
 
-        private void 端口配置ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Console.WriteLine(AppCfg.fileName);
-            string[] input = new[] { "端口号" };
-
-            Dictionary<string, TextInputType> dic = new Dictionary<string, TextInputType>();
-            dic.Add("端口号", TextInputType.Number);
-
-            Dictionary<string, string> defalut = new Dictionary<string, string>();
-            defalut.Add("端口号", AppCfg.Instance.Port.ToString());
-
-            FrmInputs frm = new FrmInputs("端口配置", input, dic, null, null, null, defalut);
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                AppCfg.Instance.Port = IntExtension.Parse(frm.Values[0]);
-                AppCfg.Instance.Save();
-            }
-
-        }
+    
 
         private void 开启服务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -447,6 +429,7 @@ namespace CardService
             nancySelfHost.Start();
             开启服务ToolStripMenuItem.Enabled = false;
             关闭服务ToolStripMenuItem.Enabled = true;
+            AppCfg.Instance.Save();
         }
 
         private void 关闭服务ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -551,29 +534,7 @@ namespace CardService
             System.Diagnostics.Process.Start(Application.StartupPath + "\\neuqpayService.log");
         }
 
-        private void ucBtnExt1_BtnClick(object sender, EventArgs e)
-        {
-            string s = "0x00";
-            if (radioButton20.Checked)
-            {
-                s = "0x00";
-            }
-            else if (radioButton21.Checked)
-            {
-                s = "0x01";
-            }
-            else if (radioButton22.Checked)
-            {
-                s = "0x03";
-            }
-            else if (radioButton23.Checked)
-            {
-                s = "0x04";
-            }
-            byte b = System.Convert.ToByte(s, 16);
-            var res = dcrf.dc_SelfServiceDeviceCardInject(Configs.Handle, Convert.ToByte(textBox4.Text, 16), b);
-            MessageBox.Show(res.ToString());
-        }
+    
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -597,6 +558,11 @@ namespace CardService
             byte b = System.Convert.ToByte(s, 16);
             var res = dcrf.dc_SelfServiceDeviceCardInject(Configs.Handle, Convert.ToByte(textBox4.Text, 16), b);
             Configs.LogDebug(res.ToString());
+        }
+
+        private void infologToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\Logs\\" + DateTime.Now.ToString("yyyy-MM-dd") + "\\Info.log");
         }
     }
 }

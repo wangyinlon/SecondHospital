@@ -18,7 +18,7 @@ namespace CardService.Config
         /// <summary>
         /// 端口
         /// </summary>
-        public int Port { get; set; }
+        public int Port { get; set; } = 9999;
         public bool SelfStart { get; set; }
         public int Handle { get; set; }
     }

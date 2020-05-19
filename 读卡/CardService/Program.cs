@@ -20,11 +20,11 @@ namespace CardService
             try
             {
                 log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(("log4net.config")));
-
+                AppCfg.FileName = Application.StartupPath + "\\config.yl";
                 Log4.Debug("startup");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-             
+
                 System.Threading.Mutex mutex = new System.Threading.Mutex(true, "c9d85cde-f58e-49fa-a99a-7b79e71a0de6", out bool ret);
                 if (ret)
                 {
@@ -49,7 +49,7 @@ namespace CardService
             catch (Exception e)
             {
                 Log4.Error(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.DateTimeFormatInfo.InvariantInfo) + "[程序崩溃]" + GetExceptionMsg(e, string.Empty));
-               
+
             }
 
 
@@ -64,7 +64,7 @@ namespace CardService
             Log4.Error("CurrentDomain_UnhandledException");
             Log4.Error("IsTerminating : " + e.IsTerminating.ToString());
             Log4.Error(e.ExceptionObject.ToString());
-         
+
             while (true)
             {//循环处理，否则应用程序将会退出
                 if (glExitApp)
@@ -82,7 +82,7 @@ namespace CardService
             Log4.Error("Application_ThreadException:" +
                            e.Exception.Message);
             Log4.Error(e.Exception);
-          
+
             //throw new NotImplementedException();
         }
         /// <summary>
@@ -109,10 +109,10 @@ namespace CardService
             sb.AppendLine("***************************************************************");
             return sb.ToString();
         }   /// <summary>
-        /// 在命令行窗口中执行
-        /// </summary>
-        /// <param name="sExePath"></param>
-        /// <param name="sArguments"></param>
+            /// 在命令行窗口中执行
+            /// </summary>
+            /// <param name="sExePath"></param>
+            /// <param name="sArguments"></param>
         static void CmdStartCTIProc(string sExePath, string sArguments)
         {
             Process p = new Process();

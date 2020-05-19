@@ -51,7 +51,7 @@ namespace CardService.Modules
             //弹卡集成
             Get["/cardexitx"] = cardexitx;
         }
-        private object obj=new object();
+        private object obj = new object();
         private Response Call1(dynamic _)
         {
             try
@@ -78,8 +78,8 @@ namespace CardService.Modules
                 Console.WriteLine(e);
                 throw;
             }
-            
-           
+
+
         }
         public Response Dc_Init(dynamic _)
         {
@@ -148,7 +148,7 @@ namespace CardService.Modules
                     AppReportManager.Instance.Send(new LogEntity() { Log = $"打开端口:{(int)handle},弹卡:{res1},关闭端口:{res2}" });
                     return Success(new { log = $"打开端口:{(int)handle},弹卡:{res1},关闭端口:{res2}" });
                 }
-              
+
             }
             catch (Exception e)
             {
@@ -188,10 +188,10 @@ namespace CardService.Modules
                     var baud = ConfigurationManager.AppSettings["Baud"];
 
                     //第1步,打开端口
-                    LogDebug("第1步,打开端口--------");
+                    LogDebug($"第1步,打开端口--------");
 
                     IntPtr handle = dcrf.dc_init(Convert.ToInt32(port), Convert.ToInt32(baud));
-
+                    LogDebug($"第1步,打开端口-------->>>handle:{(int)handle}");
                     if ((int)handle > 0)
                     {
                         AppCfg.Instance.Handle = (int)handle;
@@ -204,9 +204,10 @@ namespace CardService.Modules
 
 
                     //第2步,检测是否有卡
-                    LogDebug("第2步,检测是否有卡--------");
+                    LogDebug($"第2步,检测是否有卡--------");
                     byte b = new byte();
                     var res2 = dcrf.dc_SelfServiceDeviceCardStatus(handle, ref b);
+                    LogDebug($"第2步,检测是否有卡-------->>>res2:{res2},b:{Convert.ToInt32(b)}");
                     if (res2 != 0)
                     {
                         LogDebug($"检测是否有卡,失败!res2:{res2}");
@@ -249,8 +250,9 @@ namespace CardService.Modules
                     }
 
                     //第3步,插卡
-                    LogDebug("第3步,插卡--------");
+                    LogDebug($"第3步,插卡--------");
                     var res3 = dcrf.dc_SelfServiceDeviceCardInject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
+                    LogDebug($"第3步,插卡-------->>>res3:{res3}");
                     if (res3 != 0)
                     {
                         dcrf.dc_exit(handle);
@@ -260,15 +262,16 @@ namespace CardService.Modules
 
 
                     //第4步,检测卡类型
-                    LogDebug("第4步,检测卡类型--------");
+                    LogDebug($"第4步,检测卡类型--------");
                     var res4 = dcrf.dc_SelfServiceDeviceCheckCardType(handle);
+                    LogDebug($"第4步,检测卡类型-------->>>res4:{res4}");
                     string cardInfo = string.Empty;
                     int cardType = 0;
                     if (res4 == 49)//医保卡
                     {
                         cardType = 49;
                         //第5步,读信息
-                        LogDebug("第5步,读医保卡信息--------");
+                        LogDebug($"第5步,读医保卡信息--------");
 
                         dcrf.dc_exit(handle);
                         StringBuilder responseXml = new StringBuilder(20480);
@@ -286,7 +289,7 @@ namespace CardService.Modules
                         });
                         var res5 = SSCard.submitReqToCommService(inputXml, responseXml);
                         var card = YinLong.Utils.Core.Serialize.XMLSerializer.DeserializeFromXmlString<NeuqPayResponse<CardInfo>>(responseXml.ToString());
-
+                        LogDebug($"第5步,读医保卡信息-------->>>res5:{res5}\r\n{responseXml.ToString()}");
                         if (card.responsedata.SCARDNO != null) cardInfo = card.responsedata.SCARDNO;
 
                         handle = dcrf.dc_init(Convert.ToInt32(port), Convert.ToInt32(baud));
@@ -304,8 +307,7 @@ namespace CardService.Modules
                     {
                         cardType = 0;
                         //第5步,读信息
-                        LogDebug("第5步,读院内卡信息--------");
-
+                        LogDebug($"第5步,读院内卡信息--------");
                         byte[] data1 = new byte[1024];
                         byte[] data2 = new byte[1024];
                         byte[] data3 = new byte[1024];
@@ -314,6 +316,8 @@ namespace CardService.Modules
                         uint len3 = 0;
                         var res = dcrf.dc_readmag(handle, data1, ref len1, data2, ref len2,
                             data3, ref len3);
+                        LogDebug($"第5步,读院内卡信息-------->>>res5:{res}");
+
                         cardInfo = //Encoding.Default.GetString(data1).Replace("\u0000", "") + "|" +
                                    // Encoding.Default.GetString(data2).Replace("\u0000", "") + "|" +
                                    Encoding.Default.GetString(data2).Replace("\u0000", "");
@@ -358,14 +362,14 @@ namespace CardService.Modules
                     Log4.Info("卡号:" + cardInfo);
 
                     //第6步,弹卡
-                    LogDebug("第6步,弹卡--------");
+                    LogDebug($"第6步,弹卡--------");
                     var res6 = dcrf.dc_SelfServiceDeviceCardEject(handle, Convert.ToByte(30), System.Convert.ToByte("0x00", 16));
-
+                    LogDebug($"第6步,弹卡-------->>>res6:{res6}");
 
                     //第7步,关闭端口
-                    LogDebug("第7步,关闭端口--------");
+                    LogDebug($"第7步,关闭端口--------");
                     var res7 = dcrf.dc_exit(handle);
-
+                    LogDebug($"第7步,关闭端口-------->>>res7:{res7}");
 
                     sw.Stop();
                     return Success(new
