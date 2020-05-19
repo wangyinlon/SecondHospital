@@ -101,6 +101,7 @@
     <Compile Include="Model\OUTP_JZJLK.cs" />
     <Compile Include="Model\QueryDocLoginModel.cs" />
     <Compile Include="PasswordBoxMonitor.cs" />
+    <Compile Include="Utils\HttpHelper.cs" />
     <Compile Include="Utils\Log4.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
@@ -172,12 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Code\Code.csproj">
-      <Project>{cac450ef-87a9-428f-a575-149a6b66a4af}</Project>
-      <Name>Code</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="TriageClientUpdateConfig.xml" />
